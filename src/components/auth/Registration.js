@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
-export default class Registration extends Component {
+class Registration extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +29,9 @@ export default class Registration extends Component {
       username, email, password, password_confirmation,
     } = this.state;
 
+    // eslint-disable-next-line react/prop-types
+    const { history } = this.props;
+
     axios.post('http://localhost:3001/registrations', { // axios post takes in 3 parameters: url, things to post, withcredentials:true
       user: {
         username,
@@ -40,6 +44,8 @@ export default class Registration extends Component {
       console.log('registration response', response);
       if (response.data.status === 'created') {
         console.log('registration response', response);
+        // eslint-disable-next-line react/prop-types
+        history.push('/dashboard');
       }
     }).catch(error => {
       console.log('registration error', error);
@@ -102,3 +108,5 @@ export default class Registration extends Component {
     );
   }
 }
+
+export default withRouter(Registration);
