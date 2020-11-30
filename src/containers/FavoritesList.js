@@ -32,7 +32,7 @@ class Favorites extends Component {
     return (
       <div>
         <div className="container">
-          <h1>Products</h1>
+          <h1>My Favorites</h1>
           <div className="row">
             {
               favProducts.map(p => (

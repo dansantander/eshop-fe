@@ -1,8 +1,10 @@
 import React from 'react';
+import Registration from './auth/Registration';
 
 const Home = () => (
-  <div>
+  <div className="container">
     <h1>Inside Home</h1>
+    <Registration />
   </div>
 );
 
