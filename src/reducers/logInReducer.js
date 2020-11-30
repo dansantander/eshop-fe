@@ -5,13 +5,17 @@ const initialState = {
   user: {},
 };
 
-const userReducer = (state = initialState, action) => {
+const logInReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN_USER:
-      return action.user;
+      return {
+        ...state,
+        user: action.user,
+        loggedIn: action.loggedIn,
+      };
     default:
       return state;
   }
 };
 
-export default userReducer;
+export default logInReducer;
