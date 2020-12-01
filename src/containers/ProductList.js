@@ -25,9 +25,7 @@ class ProductList extends Component {
   }
 
   render() {
-    // console.log('this.state.products',this.state.products)
     const { products } = this.state;
-    // console.log('products',products)
 
     return (
       <div>

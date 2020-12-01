@@ -1,18 +1,21 @@
 import React from 'react';
+import { withRouter, Link } from 'react-router-dom';
 /* eslint react/prop-types: 0 */
 const Product = ({ product }) => (
-  <div className="col-12 col-md-2">
-    <div className="card">
-      <img src={product.image} className="card-img-top" alt="..." />
-      <div className="card-body">
-        <h5 className="card-title">{product.name}</h5>
-        <p className="card-text">
-          $
-          {product.price}
-        </p>
+  <div className="product col-12 col-md-3">
+    <Link to={`/products/${product.id}`} id="link-product" data-testid="product_card">
+      <div className="card">
+        <img src={product.image} className="card-img-top" alt="..." />
+        <div className="card-body">
+          <h3 className="card-text">
+            $
+            {product.price}
+          </h3>
+          <p className="card-title">{product.name}</p>
+        </div>
       </div>
-    </div>
+    </Link>
   </div>
 );
 
-export default Product;
+export default withRouter(Product);

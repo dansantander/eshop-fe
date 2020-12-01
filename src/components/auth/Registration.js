@@ -47,6 +47,7 @@ class Registration extends Component {
       if (response.data.status === 'created') {
         console.log('registration response', response);
         logInUser(response.data.user);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/dashboard');
       }
     }).catch(error => {
