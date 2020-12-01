@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logInUser } from '../../actions/actionsIndex';
 
 class Registration extends Component {
   constructor(props) {
@@ -16,6 +18,7 @@ class Registration extends Component {
   }
   /* eslint-disable camelcase */
   /* eslint-disable no-console */
+  /* eslint-disable react/prop-types */
 
   handleChange(e) {
     this.setState({
@@ -29,10 +32,10 @@ class Registration extends Component {
       username, email, password, password_confirmation,
     } = this.state;
 
-    // eslint-disable-next-line react/prop-types
+    const { logInUser } = this.props;
     const { history } = this.props;
 
-    axios.post('http://localhost:3001/registrations', { // axios post takes in 3 parameters: url, things to post, withcredentials:true
+    axios.post('http://localhost:3001/registrations', {
       user: {
         username,
         email,
@@ -41,9 +44,9 @@ class Registration extends Component {
       },
     },
     { withCredentials: true }).then(response => {
-      console.log('registration response', response);
       if (response.data.status === 'created') {
         console.log('registration response', response);
+        logInUser(response.data.user);
         // eslint-disable-next-line react/prop-types
         history.push('/dashboard');
       }
@@ -109,4 +112,14 @@ class Registration extends Component {
   }
 }
 
-export default withRouter(Registration);
+const mapStateToProps = state => ({
+  loggedIn: state.logIn.loggedIn,
+});
+
+const mapDispatchToProps = dispatch => ({
+  logInUser: user => {
+    dispatch(logInUser(user));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Registration));
