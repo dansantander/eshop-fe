@@ -4,6 +4,8 @@ import {
 } from 'react-router-dom';
 import Home from './Home';
 import Dashboard from './Dashboard';
+import Registration from './auth/Registration';
+import FavoritesList from '../containers/FavoritesList';
 
 function App() {
   return (
@@ -13,8 +15,14 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route exact path="/registration">
+            <Registration />
+          </Route>
           <Route exact path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route exact path="/favorites">
+            <FavoritesList />
           </Route>
         </Switch>
       </BrowserRouter>

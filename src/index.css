@@ -14,7 +14,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fff;
+  background-color: #fffef5;
   font-size: 0.8rem;
 }
 
@@ -39,6 +39,7 @@ h3 {
 nav {
   background-color: #2f4454;
   color: #d8c3a5;
+  box-shadow: 0 1px 8px 1px #888;
 }
 
 nav input {
@@ -48,4 +49,8 @@ nav input {
 .product a {
   text-decoration: none !important;
   color: rgb(56, 56, 56);
+}
+
+.card img {
+  height: 13rem !important;
 }

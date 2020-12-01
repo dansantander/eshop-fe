@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logInUser } from '../../actions/actionsIndex';
 
@@ -41,8 +41,8 @@ class LogIn extends Component {
     },
     { withCredentials: true }).then(response => {
       if (response.data.status === 'created') {
-        console.log('registration response', response);
         logInUser(response.data.user);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/dashboard');
       }
     }).catch(error => {
@@ -57,7 +57,6 @@ class LogIn extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-
           <div className="form-group">
             <input
               type="email"
@@ -82,6 +81,10 @@ class LogIn extends Component {
 
           <button className="btn btn-info" type="submit">Log In</button>
         </form>
+        <div>
+          <p>Don&apos;t have an account yet?</p>
+          <Link to="/registration">Register</Link>
+        </div>
       </div>
     );
   }
