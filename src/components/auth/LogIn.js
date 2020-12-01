@@ -4,14 +4,12 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logInUser } from '../../actions/actionsIndex';
 
-class Registration extends Component {
+class LogIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       email: '',
       password: '',
-      password_confirmation: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -29,18 +27,16 @@ class Registration extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const {
-      username, email, password, password_confirmation,
+      email, password,
     } = this.state;
 
     const { logInUser } = this.props;
     const { history } = this.props;
 
-    axios.post('http://localhost:3001/registrations', {
+    axios.post('http://localhost:3001/sessions', {
       user: {
-        username,
         email,
         password,
-        password_confirmation,
       },
     },
     { withCredentials: true }).then(response => {
@@ -56,21 +52,11 @@ class Registration extends Component {
 
   render() {
     const {
-      username, email, password, password_confirmation,
+      email, password,
     } = this.state;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              name="username"
-              placeholder="username"
-              value={username}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
 
           <div className="form-group">
             <input
@@ -94,17 +80,7 @@ class Registration extends Component {
             />
           </div>
 
-          <div className="form-group">
-            <input
-              type="password"
-              name="password_confirmation"
-              placeholder="Password confirmation"
-              value={password_confirmation}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <button className="btn btn-info" type="submit">Register</button>
+          <button className="btn btn-info" type="submit">Log In</button>
         </form>
       </div>
     );
@@ -121,4 +97,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Registration));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LogIn));
