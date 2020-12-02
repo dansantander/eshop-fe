@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Product from '../components/Product';
-
+/* eslint-disable */
 class Favorites extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +13,7 @@ class Favorites extends Component {
   componentDidMount() {
     let mounted = true;
 
-    axios.get('http://localhost:3001/favorites')
+    axios.get('http://localhost:3001/favorites', { withCredentials: true })
       .then(result => {
         if (mounted) {
           this.setState({
@@ -25,7 +25,7 @@ class Favorites extends Component {
   }
 
   render() {
-    // console.log('this.state.products',this.state.products)
+    console.log('this.state.favProducts',this.state.favProducts);
     const { favProducts } = this.state;
     // console.log('products',products)
 

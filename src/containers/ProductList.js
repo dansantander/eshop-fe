@@ -13,7 +13,7 @@ class ProductList extends Component {
   componentDidMount() {
     let mounted = true;
 
-    axios.get('http://localhost:3001/products')
+    axios.get('http://localhost:3001/products', { withCredentials: true })
       .then(result => {
         if (mounted) {
           this.setState({
