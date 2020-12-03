@@ -7,11 +7,17 @@ import Dashboard from './Dashboard';
 import Registration from './auth/Registration';
 import FavoritesList from '../containers/FavoritesList';
 import ProductDetails from '../containers/ProductDetails';
+import Header from './Header';
+
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 
 function App() {
+  const user = JSON.parse(localStorage.getItem('user'));
   return (
     <div className="App">
       <BrowserRouter>
+        { user ? <Header user={user} /> : null }
         <Switch>
           <Route exact path="/">
             <Home />

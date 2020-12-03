@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
 } from '@fortawesome/free-solid-svg-icons';
-
-const Header = () => (
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
+const Header = ({ user }) => (
   <div
     id="nav-links"
     className="nav-top pl-3 py-2 w-100 border-bottom d-flex justify-content-between"
@@ -15,8 +16,10 @@ const Header = () => (
       <Dropdown.Toggle variant="secondary" id="dropdown-basic">
         <FontAwesomeIcon icon={faBars} />
       </Dropdown.Toggle>
-
       <Dropdown.Menu>
+        <Dropdown.Item as={Link} className="pl-2" to="/dashboard">
+          All Products
+        </Dropdown.Item>
         <Dropdown.Item as={Link} className="pl-2" to="/favorites">
           Upload Products
         </Dropdown.Item>
@@ -26,9 +29,9 @@ const Header = () => (
       </Dropdown.Menu>
     </Dropdown>
     <div className="mr-4 align-self-center">
-      Welcome
+      Welcome,
       {' '}
-      <b>Daniel</b>
+      <b>{user.username}</b>
       {' '}
       !
     </div>
