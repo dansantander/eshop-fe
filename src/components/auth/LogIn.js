@@ -55,10 +55,15 @@ class LogIn extends Component {
       email, password,
     } = this.state;
     return (
-      <div>
+      <div className="login">
+        <div className="form-top">
+          <h1>Sign In</h1>
+          <p>Hello there! Sign In and start selling your products</p>
+        </div>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <input
+              className="form-control"
               type="email"
               name="email"
               placeholder="name@domain.com"
@@ -70,6 +75,7 @@ class LogIn extends Component {
 
           <div className="form-group">
             <input
+              className="form-control"
               type="password"
               name="password"
               placeholder="Password"
@@ -78,8 +84,7 @@ class LogIn extends Component {
               required
             />
           </div>
-
-          <button className="btn btn-info" type="submit">Log In</button>
+          <button className="btn btn-info" type="submit">Sign In</button>
         </form>
         <div>
           <p>Don&apos;t have an account yet?</p>

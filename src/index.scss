@@ -14,7 +14,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fffef5;
+  background-color: #fafafa;
   font-size: 0.8rem;
 }
 
@@ -36,14 +36,44 @@ h3 {
   font-size: 1.2rem !important;
 }
 
+.login-container {
+  height: 100vh;
+}
+
+.login {
+  text-align: center;
+  width: 70%;
+
+  .form-top {
+    p {
+      max-width: 200px;
+    }
+  }
+
+  .form-group {
+    .form-control {
+      border-radius: 2rem;
+      height: 2.8rem;
+      max-width: 90%;
+    }
+  }
+
+  .btn {
+    background-color: #ff5617;
+    border: none;
+    border-radius: 2rem;
+    min-width: 150px;
+  }
+}
+
 nav {
   background-color: #2f4454;
   color: #d8c3a5;
   box-shadow: 0 1px 8px 1px #888;
-}
 
-nav input {
-  width: 35vw !important;
+  input {
+    width: 35vw !important;
+  }
 }
 
 .product a {
