@@ -38,11 +38,12 @@ h3 {
 
 .login-container {
   height: 100vh;
+  background-image: linear-gradient(rgba(250, 160, 42, 0.836), rgba(214, 246, 255, 0.6)), url(assets/laptop-and-shopping-bags-online-shopping-concept-min.jpg);
+  background-size: cover;
 }
 
 .login {
   text-align: center;
-  width: 70%;
 
   .form-top {
     p {
@@ -54,7 +55,6 @@ h3 {
     .form-control {
       border-radius: 2rem;
       height: 2.8rem;
-      max-width: 90%;
     }
   }
 

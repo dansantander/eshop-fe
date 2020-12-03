@@ -55,8 +55,8 @@ class LogIn extends Component {
       email, password,
     } = this.state;
     return (
-      <div className="login">
-        <div className="form-top">
+      <div className="login d-flex flex-column align-items-center">
+        <div className="form-top mb-3">
           <h1>Sign In</h1>
           <p>Hello there! Sign In and start selling your products</p>
         </div>
@@ -84,7 +84,7 @@ class LogIn extends Component {
               required
             />
           </div>
-          <button className="btn btn-info" type="submit">Sign In</button>
+          <button className="btn btn-info my-3" type="submit">Sign In</button>
         </form>
         <div>
           <p>Don&apos;t have an account yet?</p>
