@@ -1,14 +1,22 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 /* eslint react/prop-types: 0 */
 /* eslint-disable no-console */
-const Product = ({ product, isFav, user }) => {
+const Product = ({
+  product, isFav, user, favorites,
+}) => {
+  function findInFavorites(product) {
+    const favorite = favorites.findIndex(f => f.id === product.id);
+    return favorite;
+  }
+
   function addFavorite() {
     axios.post('http://localhost:3001/favorites', {
-      product_id: product.id,
       user_id: user.id,
+      product_id: product.id,
     },
     { withCredentials: true }).then(response => {
       if (response.data.status === 'created') {
@@ -16,6 +24,24 @@ const Product = ({ product, isFav, user }) => {
       }
     }).catch(error => {
       console.log('create favorite error', error);
+    });
+  }
+
+  function removeFavorite() {
+    const id = findInFavorites(product);
+    axios.delete(`http://localhost:3001/favorites/${id}`,
+      {
+        data: {
+          user_id: user.id,
+          product_id: product.id,
+        },
+      },
+      { withCredentials: true }).then(response => {
+      if (response.data.status === 'created') {
+        console.log(' favorite deleted', response);
+      }
+    }).catch(error => {
+      console.log('favorite delete error', error);
     });
   }
 
@@ -29,8 +55,8 @@ const Product = ({ product, isFav, user }) => {
               role="button"
               aria-label="Mute volume"
               className="fas fa-heart"
-              onClick={() => console.log('working?')}
-              onKeyDown={() => console.log('working?')}
+              onClick={() => removeFavorite()}
+              onKeyDown={() => removeFavorite()}
             />
           )
           : (
@@ -58,4 +84,8 @@ const Product = ({ product, isFav, user }) => {
   );
 };
 
-export default withRouter(Product);
+const mapStateToProps = state => ({
+  favorites: state.favorites,
+});
+
+export default connect(mapStateToProps)(withRouter(Product));

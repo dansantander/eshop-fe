@@ -17,7 +17,7 @@ const Header = ({ user }) => (
         <FontAwesomeIcon icon={faBars} />
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item as={Link} className="pl-2" to="/dashboard">
+        <Dropdown.Item as={Link} className="pl-2" to="/products">
           All Products
         </Dropdown.Item>
         <Dropdown.Item as={Link} className="pl-2" to="/favorites">
