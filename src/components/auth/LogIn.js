@@ -43,7 +43,7 @@ class LogIn extends Component {
       if (response.data.status === 'created') {
         logInUser(response.data.user);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        history.push('/dashboard');
+        history.push('/products');
       }
     }).catch(error => {
       console.log('registration error', error);

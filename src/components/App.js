@@ -3,11 +3,12 @@ import {
   BrowserRouter, Switch, Route,
 } from 'react-router-dom';
 import Home from './Home';
-import Dashboard from './Dashboard';
+// import Dashboard from './Dashboard';
 import Registration from './auth/Registration';
 import FavoritesList from '../containers/FavoritesList';
 import ProductDetails from '../containers/ProductDetails';
 import Header from './Header';
+import ProductList from '../containers/ProductList';
 
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
@@ -25,8 +26,8 @@ function App() {
           <Route exact path="/registration">
             <Registration />
           </Route>
-          <Route exact path="/dashboard">
-            <Dashboard />
+          <Route exact path="/products">
+            <ProductList user={user} />
           </Route>
           <Route exact path="/products/:id">
             <ProductDetails />

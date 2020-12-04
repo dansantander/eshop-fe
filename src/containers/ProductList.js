@@ -39,6 +39,7 @@ class ProductList extends Component {
 
   render() {
     const { products, favorites } = this.state;
+    const { user } = this.props;
     return (
       <div>
         <div className="container my-5">
@@ -52,6 +53,7 @@ class ProductList extends Component {
                   key={p.id}
                   product={p}
                   isFav={favorites.some(f => f.id === p.id)}
+                  user={user}
                 />
               ))
             }
