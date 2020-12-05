@@ -14,7 +14,7 @@ import ProductList from '../containers/ProductList';
 /* eslint-disable react/prop-types */
 
 function App() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
   return (
     <div className="App">
       <BrowserRouter>

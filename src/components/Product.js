@@ -2,43 +2,43 @@ import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
-
+import { addFavorite, removeFavorite } from '../actions/actionsIndex';
 /* eslint react/prop-types: 0 */
 /* eslint-disable no-console */
 const Product = ({
-  product, isFav, user, favorites,
+  product, isFav, /* user */ favorites, addFavorite, removeFavorite,
 }) => {
   function findInFavorites(product) {
     const favorite = favorites.findIndex(f => f.id === product.id);
     return favorite;
   }
 
-  function addFavorite() {
+  function addToFavorites() {
     axios.post('http://localhost:3001/favorites', {
-      user_id: user.id,
       product_id: product.id,
     },
     { withCredentials: true }).then(response => {
       if (response.data.status === 'created') {
-        console.log(' create favorite response', response);
+        console.log('favorite', response.data.favorite);
+        addFavorite(response.data.favorite);
       }
     }).catch(error => {
       console.log('create favorite error', error);
     });
   }
 
-  function removeFavorite() {
+  function removeFromFavorites() {
     const id = findInFavorites(product);
     axios.delete(`http://localhost:3001/favorites/${id}`,
       {
         data: {
-          user_id: user.id,
           product_id: product.id,
         },
       },
       { withCredentials: true }).then(response => {
-      if (response.data.status === 'created') {
+      if (response.data.status === 'removed') {
         console.log(' favorite deleted', response);
+        removeFavorite();
       }
     }).catch(error => {
       console.log('favorite delete error', error);
@@ -55,8 +55,8 @@ const Product = ({
               role="button"
               aria-label="Mute volume"
               className="fas fa-heart"
-              onClick={() => removeFavorite()}
-              onKeyDown={() => removeFavorite()}
+              onClick={() => removeFromFavorites()}
+              onKeyDown={() => removeFromFavorites()}
             />
           )
           : (
@@ -65,8 +65,8 @@ const Product = ({
               role="button"
               aria-label="Mute volume"
               className="far fa-heart"
-              onClick={() => addFavorite()}
-              onKeyDown={() => addFavorite()}
+              onClick={() => addToFavorites()}
+              onKeyDown={() => addToFavorites()}
             />
           )}
         <Link to={`/products/${product.id}`} id="link-product" data-testid="product_card">
@@ -88,4 +88,13 @@ const mapStateToProps = state => ({
   favorites: state.favorites,
 });
 
-export default connect(mapStateToProps)(withRouter(Product));
+const mapDispatchToProps = dispatch => ({
+  addToFavorites: favorite => {
+    dispatch(addFavorite(favorite));
+  },
+  removeFavorite: favorite => {
+    dispatch(removeFavorite(favorite));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Product));

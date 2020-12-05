@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Product from '../components/Product';
-import { setFavorites } from '../actions/actionsIndex';
+import { setFavorites, setProducts } from '../actions/actionsIndex';
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 class ProductList extends Component {
@@ -16,7 +16,7 @@ class ProductList extends Component {
 
   componentDidMount() {
     let mounted = true;
-    const { setFavorites } = this.props;
+    const { setFavorites, setProducts } = this.props;
 
     axios.get('http://localhost:3001/products', { withCredentials: true })
       .then(result => {
@@ -25,6 +25,7 @@ class ProductList extends Component {
             products: result.data.products,
           });
         }
+        setProducts(result.data.products);
         mounted = false;
       });
 
@@ -67,6 +68,9 @@ class ProductList extends Component {
 const mapDispatchToProps = dispatch => ({
   setFavorites: favorites => {
     dispatch(setFavorites(favorites));
+  },
+  setProducts: products => {
+    dispatch(setProducts(products));
   },
 });
 

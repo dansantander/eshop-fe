@@ -42,7 +42,7 @@ class LogIn extends Component {
     { withCredentials: true }).then(response => {
       if (response.data.status === 'created') {
         logInUser(response.data.user);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        // localStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/products');
       }
     }).catch(error => {
