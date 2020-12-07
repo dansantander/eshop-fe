@@ -59,53 +59,59 @@ class Registration extends Component {
       username, email, password, password_confirmation,
     } = this.state;
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              name="username"
-              placeholder="username"
-              value={username}
-              onChange={this.handleChange}
-              required
-            />
+      <div className="login-container d-flex justify-content-center align-items-center">
+        <div className="login d-flex flex-column align-items-center">
+          <div className="form-top mb-3">
+            <h1>Sign Up</h1>
+            <p>Hello there! Sign Up and start selling your products</p>
           </div>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <input
+                type="text"
+                name="username"
+                placeholder="username"
+                value={username}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
 
-          <div className="form-group">
-            <input
-              type="email"
-              name="email"
-              placeholder="name@domain.com"
-              value={email}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="name@domain.com"
+                value={email}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
 
-          <div className="form-group">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
 
-          <div className="form-group">
-            <input
-              type="password"
-              name="password_confirmation"
-              placeholder="Password confirmation"
-              value={password_confirmation}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <button className="btn btn-info" type="submit">Register</button>
-        </form>
+            <div className="form-group">
+              <input
+                type="password"
+                name="password_confirmation"
+                placeholder="Password confirmation"
+                value={password_confirmation}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <button className="btn btn-info" type="submit">Register</button>
+          </form>
+        </div>
       </div>
     );
   }

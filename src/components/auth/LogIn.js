@@ -41,8 +41,9 @@ class LogIn extends Component {
     },
     { withCredentials: true }).then(response => {
       if (response.data.status === 'created') {
+        console.log('hitting login js??');
         logInUser(response.data.user);
-        // localStorage.setItem('user', JSON.stringify(response.data.user));
+        sessionStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/products');
       }
     }).catch(error => {
@@ -55,40 +56,42 @@ class LogIn extends Component {
       email, password,
     } = this.state;
     return (
-      <div className="login d-flex flex-column align-items-center">
-        <div className="form-top mb-3">
-          <h1>Sign In</h1>
-          <p>Hello there! Sign In and start selling your products</p>
-        </div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input
-              className="form-control"
-              type="email"
-              name="email"
-              placeholder="name@domain.com"
-              value={email}
-              onChange={this.handleChange}
-              required
-            />
+      <div className="login-container d-flex justify-content-center align-items-center">
+        <div className="login d-flex flex-column align-items-center">
+          <div className="form-top mb-3">
+            <h1>Sign In</h1>
+            <p>Hello there! Sign In and start selling your products</p>
           </div>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <input
+                className="form-control"
+                type="email"
+                name="email"
+                placeholder="name@domain.com"
+                value={email}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
 
-          <div className="form-group">
-            <input
-              className="form-control"
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={this.handleChange}
-              required
-            />
+            <div className="form-group">
+              <input
+                className="form-control"
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <button className="btn btn-info my-3" type="submit">Sign In</button>
+          </form>
+          <div>
+            <p>Don&apos;t have an account yet?</p>
+            <Link to="/registration">Register</Link>
           </div>
-          <button className="btn btn-info my-3" type="submit">Sign In</button>
-        </form>
-        <div>
-          <p>Don&apos;t have an account yet?</p>
-          <Link to="/registration">Register</Link>
         </div>
       </div>
     );

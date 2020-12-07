@@ -4,7 +4,7 @@ const initialState = {
   products: [],
 };
 
-const favoritesReducer = (state = initialState, action) => {
+const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PRODUCTS:
       return action.products;
@@ -13,4 +13,4 @@ const favoritesReducer = (state = initialState, action) => {
   }
 };
 
-export default favoritesReducer;
+export default productsReducer;
