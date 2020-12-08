@@ -20,6 +20,13 @@ class Registration extends Component {
   /* eslint-disable no-console */
   /* eslint-disable react/prop-types */
 
+  componentDidUpdate() {
+    const { loggedIn, history } = this.props;
+    if (loggedIn === 'LOGGED_IN') {
+      history.push('/products');
+    }
+  }
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
@@ -32,7 +39,6 @@ class Registration extends Component {
       username, email, password, password_confirmation,
     } = this.state;
 
-    // const { logInUser } = this.props;
     const { history } = this.props;
 
     axios.post('http://localhost:3001/registrations', {
@@ -45,7 +51,7 @@ class Registration extends Component {
     },
     { withCredentials: true }).then(response => {
       if (response.data.status === 'created') {
-        // logInUser(response.data.user);
+        logInUser(response.data.user);
         sessionStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/products');
       }

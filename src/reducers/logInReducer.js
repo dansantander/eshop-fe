@@ -1,4 +1,4 @@
-import { LOG_IN_USER } from '../actions/actionsIndex';
+import { LOG_IN_USER, LOG_OUT_USER } from '../actions/actionsIndex';
 
 const initialState = {
   loggedIn: 'NOT_LOGGED_IN',
@@ -13,6 +13,8 @@ const logInReducer = (state = initialState, action) => {
         user: action.user,
         loggedIn: action.loggedIn,
       };
+    case LOG_OUT_USER:
+      return state;
     default:
       return state;
   }
