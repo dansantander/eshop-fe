@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import { addFavorite, removeFavorite } from '../actions/actionsIndex';
+import { setFavorites } from '../actions/actionsIndex';
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 class ProductDetails extends Component {
@@ -22,6 +22,7 @@ class ProductDetails extends Component {
     super(props);
     this.state = {
       product: {},
+      favorites: [],
       isLoading: true,
     };
 
@@ -35,28 +36,48 @@ class ProductDetails extends Component {
     let mounted = true;
 
     axios.get(`http://localhost:3001/products/${id}`, { withCredentials: true })
-      .then(result => {
+      .then(res => {
         if (mounted) {
           this.setState({
-            product: result.data,
+            product: res.data,
             isLoading: false,
           });
           mounted = false;
         }
       });
+
+    axios.get('http://localhost:3001/favorites', { withCredentials: true })
+      .then(res => {
+        this.setState({
+          favorites: res.data.favProducts,
+        });
+        setFavorites(res.data.favProducts);
+      });
+  }
+
+  findInFavorites() {
+    const { match } = this.props;
+    const { id } = match.params;
+    const { favorites } = this.state;
+    const favorite = favorites.some(f => f.id === parseInt(id, 10));
+    const isFavorite = favorite;
+    return isFavorite;
   }
 
   addToFavorites() {
     console.log('entered');
-    const { match, addFavorite } = this.props;
+    const { match, setFavorites } = this.props;
     const { id } = match.params;
     axios.post('http://localhost:3001/favorites', {
       product_id: id,
     },
     { withCredentials: true })
-      .then(response => {
-        if (response.data.status === 'created') {
-          addFavorite(response.data.favorite);
+      .then(res => {
+        if (res.data.status === 'created') {
+          this.setState({
+            favorites: res.data.favProducts,
+          });
+          setFavorites(res.data.favProducts);
           ProductDetails.fillStar();
         }
       }).catch(error => {
@@ -65,13 +86,16 @@ class ProductDetails extends Component {
   }
 
   removeFromFavorites() {
-    const { match } = this.props;
+    const { match, setFavorites } = this.props;
     const { id } = match.params;
     axios.delete(`http://localhost:3001/favorites/${id}`,
       { withCredentials: true })
-      .then(response => {
-        if (response.data.status === 'removed') {
-          console.log(' favorite deleted', response);
+      .then(res => {
+        if (res.data.status === 'removed') {
+          this.setState({
+            favorites: res.data.favProducts,
+          });
+          setFavorites(res.data.favProducts);
           ProductDetails.outlineStar();
         }
       }).catch(error => {
@@ -80,22 +104,22 @@ class ProductDetails extends Component {
   }
 
   render() {
-    const { product, isLoading } = this.state;
-    const { location } = this.props;
-    const { isFav } = location.state;
+    const isFavorite = this.findInFavorites();
+    const { product, isLoading, favorites } = this.state;
+    console.log('state favorites', favorites);
     return (
       <>
         { !isLoading ? (
           <div className="container">
             <div className="card movie-details my-5">
-              {isFav
+              {isFavorite
                 ? (
                   <i
                     id="heart"
                     tabIndex={0}
                     role="button"
                     aria-label="Mute volume"
-                    className="fas fa-heart"
+                    className="fas fa-heart" // heart filled
                     onClick={() => this.removeFromFavorites()}
                     onKeyDown={() => this.removeFromFavorites()}
                   />
@@ -134,15 +158,12 @@ class ProductDetails extends Component {
 }
 
 const mapStateToProps = state => ({
-  favorites: state.favorites.favorites,
+  favorites: state.favorites,
 });
 
 const mapDispatchToProps = dispatch => ({
-  addFavorite: favorite => {
-    dispatch(addFavorite(favorite));
-  },
-  removeFavorite: favorite => {
-    dispatch(removeFavorite(favorite));
+  setFavorites: favorites => {
+    dispatch(setFavorites(favorites));
   },
 });
 

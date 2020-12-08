@@ -15,7 +15,7 @@ import Header from './Header';
 
 const App = () => {
   const user = JSON.parse(sessionStorage.getItem('user'));
-  console.log('user', user);
+  console.log('user in App', user);
 
   return (
     <div className="App">

@@ -1,11 +1,6 @@
 import { SET_FAVORITES, ADD_FAVORITE, REMOVE_FAVORITE } from '../actions/actionsIndex';
-/* eslint-disable no-console */
-const initialState = {
-  favorites: [],
-};
 
-const favoritesReducer = (state = initialState, action) => {
-  console.log('loading favorites reducer');
+const favoritesReducer = (state = [], action) => {
   switch (action.type) {
     case SET_FAVORITES:
       return action.favorites;
