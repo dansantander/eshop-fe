@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Product from '../components/Product';
-/* eslint-disable */
+/* eslint-disable no-console */
 class Favorites extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +25,6 @@ class Favorites extends Component {
   }
 
   render() {
-    console.log('this.state.favProducts',this.state.favProducts);
     const { favProducts } = this.state;
 
     return (

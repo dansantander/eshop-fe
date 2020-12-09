@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import Registration from './auth/Registration';
 import LogIn from './auth/LogIn';
 import ProductList from '../containers/ProductList';
@@ -13,7 +14,6 @@ import Header from './Header';
 import { logInUser } from '../actions/actionsIndex';
 
 /* eslint-disable no-console */
-/* eslint-disable react/prop-types */
 
 const App = props => {
   const { logInUser } = props;
@@ -66,5 +66,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(logInUser(user));
   },
 });
+
+App.propTypes = {
+  loggedIn: PropTypes.string.isRequired,
+  logInUser: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

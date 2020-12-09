@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { logInUser } from '../../actions/actionsIndex';
 
 class Registration extends Component {
@@ -18,7 +19,6 @@ class Registration extends Component {
   }
   /* eslint-disable camelcase */
   /* eslint-disable no-console */
-  /* eslint-disable react/prop-types */
 
   componentDidUpdate() {
     const { loggedIn, history } = this.props;
@@ -39,6 +39,7 @@ class Registration extends Component {
       username, email, password, password_confirmation,
     } = this.state;
 
+    const { logInUser } = this.props;
     const { history } = this.props;
 
     axios.post('http://localhost:3001/registrations', {
@@ -132,5 +133,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(logInUser(user));
   },
 });
+
+Registration.propTypes = {
+  loggedIn: PropTypes.string.isRequired,
+  logInUser: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Registration));

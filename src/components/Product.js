@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
-/* eslint react/prop-types: 0 */
+import PropTypes from 'prop-types';
 /* eslint-disable no-console */
 const Product = ({ product, isFav }) => (
   <div className="product col-12 col-md-3 my-4">
@@ -40,5 +40,15 @@ const Product = ({ product, isFav }) => (
     </div>
   </div>
 );
+
+Product.propTypes = {
+  isFav: PropTypes.bool.isRequired,
+  product: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    image: PropTypes.string,
+    price: PropTypes.number,
+  }).isRequired,
+};
 
 export default (withRouter(Product));

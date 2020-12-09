@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { setFavorites } from '../actions/actionsIndex';
-/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 class ProductDetails extends Component {
   static fillStar() {
@@ -166,5 +166,14 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setFavorites(favorites));
   },
 });
+
+ProductDetails.propTypes = {
+  setFavorites: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductDetails));

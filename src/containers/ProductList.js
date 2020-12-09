@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import { setFavorites, setProducts } from '../actions/actionsIndex';
-/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 class ProductList extends Component {
   constructor(props) {
@@ -71,5 +71,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setProducts(products));
   },
 });
+
+ProductList.propTypes = {
+  setFavorites: PropTypes.func.isRequired,
+  setProducts: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(ProductList);

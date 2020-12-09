@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { logInUser } from '../../actions/actionsIndex';
 
 class LogIn extends Component {
@@ -14,9 +15,7 @@ class LogIn extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  /* eslint-disable camelcase */
   /* eslint-disable no-console */
-  /* eslint-disable react/prop-types */
 
   componentDidUpdate() {
     const { loggedIn, history } = this.props;
@@ -113,5 +112,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(logInUser(user));
   },
 });
+
+LogIn.propTypes = {
+  loggedIn: PropTypes.string.isRequired,
+  logInUser: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LogIn));

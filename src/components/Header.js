@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { logOutUser } from '../actions/actionsIndex';
 /* eslint-disable no-console */
-/* eslint-disable react/prop-types */
+
 const Header = props => {
   const logOut = () => {
     const { logOutUser } = props;
@@ -74,5 +75,13 @@ const mapDispatchToProps = dispatch => ({
     dispatch(logOutUser());
   },
 });
+
+Header.propTypes = {
+  loggedIn: PropTypes.string.isRequired,
+  logOutUser: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    username: PropTypes.string,
+  }).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
