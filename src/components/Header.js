@@ -2,9 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
+import axios from 'axios';
+import { logOutUser } from '../actions/actionsIndex';
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 const Header = props => {
+  const logOut = () => {
+    const { logOutUser } = props;
+    axios.delete('http://localhost:3001/logged_out', { withCredentials: true })
+      .then(() => logOutUser())
+      .catch();
+  };
+
   const { loggedIn, user } = props;
   if (loggedIn === 'LOGGED_IN') {
     return (
@@ -24,6 +33,12 @@ const Header = props => {
 
             <Dropdown.Item as={Link} to="/favorites" className="pl-2">
               Favorite Products
+            </Dropdown.Item>
+
+            <Dropdown.Divider />
+
+            <Dropdown.Item onSelect={() => logOut()} className="pl-2">
+              LogOut
             </Dropdown.Item>
 
           </Dropdown.Menu>
@@ -54,4 +69,10 @@ const mapStateToProps = state => ({
   user: state.logIn.user,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  logOutUser: () => {
+    dispatch(logOutUser());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

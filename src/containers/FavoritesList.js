@@ -27,7 +27,6 @@ class Favorites extends Component {
   render() {
     console.log('this.state.favProducts',this.state.favProducts);
     const { favProducts } = this.state;
-    // console.log('products',products)
 
     return (
       <div>

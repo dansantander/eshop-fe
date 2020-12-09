@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  BrowserRouter, Switch, Route,
+  BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -46,9 +46,9 @@ const App = props => {
           <Switch>
             <Route exact path="/"><LogIn /></Route>
             <Route exact path="/registration"><Registration /></Route>
-            <Route exact path="/products"><ProductList /></Route>
-            <Route exact path="/products/:id"><ProductDetails /></Route>
-            <Route exact path="/favorites"><FavoritesList /></Route>
+            { loggedIn === 'LOGGED_IN' ? <Route exact path="/products"><ProductList /></Route> : <Redirect to="/" />}
+            { loggedIn === 'LOGGED_IN' ? <Route exact path="/products/:id"><ProductDetails /></Route> : <Redirect to="/" />}
+            { loggedIn === 'LOGGED_IN' ? <Route exact path="/favorites"><FavoritesList /></Route> : <Redirect to="/" />}
           </Switch>
         </BrowserRouter>
       </div>
