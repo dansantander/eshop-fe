@@ -145,12 +145,12 @@ class ProductDetails extends Component {
                 <h3 className="" data-testid="Title">
                   {product.name}
                 </h3>
-                <h5 className="" data-testid="Actors">
+                <p className="" data-testid="Actors">
                   {product.description}
-                </h5>
-                <p className="">
-                  {product.price}
                 </p>
+                <h3 className="">
+                  {product.price}
+                </h3>
               </div>
             </div>
           </div>

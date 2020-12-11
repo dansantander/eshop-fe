@@ -46,7 +46,7 @@ class ProductList extends Component {
     return (
       <div>
         <div className="container my-5">
-          <div className="container-fluid">
+          <div className="">
             <h1>Products</h1>
           </div>
           <div className="row">

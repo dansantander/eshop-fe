@@ -44,10 +44,10 @@ const Product = ({ product, isFav }) => (
 Product.propTypes = {
   isFav: PropTypes.bool.isRequired,
   product: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     image: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
   }).isRequired,
 };
 

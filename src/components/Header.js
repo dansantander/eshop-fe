@@ -22,7 +22,7 @@ const Header = props => {
     return (
       <div
         id="nav-links"
-        className="nav-top pl-3 py-2 w-100 border-bottom d-flex justify-content-between"
+        className="nav-top pl-3 py-2 w-100 border-bottom d-flex justify-content-around align-items-center"
       >
         <Dropdown>
           <Dropdown.Toggle variant="secondary" id="dropdown-basic">
@@ -46,12 +46,19 @@ const Header = props => {
 
           </Dropdown.Menu>
         </Dropdown>
-        <div className="mr-4 align-self-center">
+        <h1 className="logo"> mallster </h1>
+        <div className="align-self-center">
           Welcome,
           {' '}
           <b>{user.username}</b>
           {' '}
           !
+        </div>
+        <div className="cart">
+          <i className="fas fa-bell" />
+        </div>
+        <div className="cart">
+          <i className="fas fa-shopping-cart" />
         </div>
       </div>
     );
@@ -62,7 +69,7 @@ const Header = props => {
       id="nav-links"
       className="nav-top pl-3 py-2 w-100 border-bottom d-flex justify-content-center"
     >
-      LOGO
+      <h1 className="logo"> mallster </h1>
     </div>
   );
 };

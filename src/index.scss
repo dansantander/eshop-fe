@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 body {
   margin: 0;
   font-family:
@@ -36,8 +38,17 @@ h3 {
   font-size: 1.2rem !important;
 }
 
+h5 {
+  font-size: 1rem !important;
+}
+
+.logo {
+  font-family: 'Lobster', cursive;
+  font-size: 2rem !important;
+}
+
 .login-container {
-  height: 100vh;
+  height: calc(100vh - 62px);
   background-image: linear-gradient(rgba(255, 194, 115, 0.836), rgba(214, 246, 255, 0.6));
   background-size: cover;
 }
@@ -53,8 +64,10 @@ h3 {
 
   .form-group {
     .form-control {
+      border: none;
       border-radius: 2rem;
       height: 2.8rem;
+      font-size: 0.8rem;
     }
   }
 
@@ -69,6 +82,8 @@ h3 {
 .nav-top {
   background-color: #ff5617;
   color: #fff;
+  box-shadow: 1px 4px 5px rgb(182, 182, 182);
+  border-bottom: 0 !important;
 
   .dropdown {
     button {

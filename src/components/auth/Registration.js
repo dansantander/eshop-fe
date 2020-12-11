@@ -77,6 +77,7 @@ class Registration extends Component {
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <input
+                className="form-control"
                 type="text"
                 name="username"
                 placeholder="username"
@@ -88,6 +89,7 @@ class Registration extends Component {
 
             <div className="form-group">
               <input
+                className="form-control"
                 type="email"
                 name="email"
                 placeholder="name@domain.com"
@@ -99,6 +101,7 @@ class Registration extends Component {
 
             <div className="form-group">
               <input
+                className="form-control"
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -110,6 +113,7 @@ class Registration extends Component {
 
             <div className="form-group">
               <input
+                className="form-control"
                 type="password"
                 name="password_confirmation"
                 placeholder="Password confirmation"
@@ -118,7 +122,7 @@ class Registration extends Component {
                 required
               />
             </div>
-            <button className="btn btn-info" type="submit">Register</button>
+            <button className="btn btn-info my-3" type="submit">Register</button>
           </form>
         </div>
       </div>
