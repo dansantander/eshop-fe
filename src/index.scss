@@ -98,6 +98,24 @@ h5 {
   color: rgb(56, 56, 56);
 }
 
-.card img {
-  height: 13rem !important;
+.card {
+  box-shadow: 2px 5px 8px rgb(199, 199, 199);
+  border-radius: 2rem;
+
+  img {
+    height: 13rem !important;
+    position: relative;
+  }
+
+  h3 {
+    color: #ff5617 !important;
+  }
+}
+
+.fa-heart {
+  color: rgb(67, 184, 106);
+  font-size: 1.3rem;
+  position: absolute;
+  z-index: 1;
+  margin: 8px 8px;
 }

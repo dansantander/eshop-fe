@@ -116,7 +116,7 @@ class ProductDetails extends Component {
       <>
         { !isLoading ? (
           <div className="container">
-            <div className="card movie-details my-5">
+            <div className="card product-details my-5">
               {isFavorite
                 ? (
                   <i
@@ -142,7 +142,7 @@ class ProductDetails extends Component {
                 )}
               <img alt="" className="card-img-top" src={product.image} />
               <div className="card-body">
-                <h3 className="" data-testid="Title">
+                <h3 className="product-name" data-testid="Title">
                   {product.name}
                 </h3>
                 <p className="" data-testid="Actors">
