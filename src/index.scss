@@ -93,13 +93,17 @@ h5 {
   }
 }
 
+.section-title {
+  text-align: center;
+}
+
 .product a {
   text-decoration: none !important;
   color: rgb(56, 56, 56);
 }
 
 .card {
-  box-shadow: 2px 5px 8px rgb(199, 199, 199);
+  box-shadow: 2px 5px 8px rgb(230, 230, 230);
   border-radius: 2rem;
 
   img {

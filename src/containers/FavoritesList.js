@@ -31,8 +31,10 @@ class Favorites extends Component {
 
     return (
       <div>
-        <div className="container">
-          <h1>My Favorites</h1>
+        <div className="container  my-5">
+          <div className="section-title">
+            <h1>My Favorites</h1>
+          </div>
           <div className="row">
             {
               favProducts.map(p => (
