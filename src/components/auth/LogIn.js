@@ -4,6 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logInUser } from '../../actions/actionsIndex';
+import URL from '../../helpers/url';
 
 class LogIn extends Component {
   constructor(props) {
@@ -39,7 +40,8 @@ class LogIn extends Component {
     const { logInUser } = this.props;
     const { history } = this.props;
 
-    axios.post('http://localhost:3001/sessions', {
+    axios.post(`${URL}/sessions`, {
+    // axios.post('https://eshop-be-1418.herokuapp.com/sessions', {
       user: {
         email,
         password,

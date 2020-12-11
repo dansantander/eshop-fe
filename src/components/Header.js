@@ -5,12 +5,14 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { logOutUser } from '../actions/actionsIndex';
+import URL from '../helpers/url';
 /* eslint-disable no-console */
 
 const Header = props => {
   const logOut = () => {
     const { logOutUser } = props;
-    axios.delete('http://localhost:3001/logged_out', { withCredentials: true })
+    axios.delete(`${URL}/logged_out`, { withCredentials: true })
+    // axios.delete('https://eshop-be-1418.herokuapp.com/logged_out', { withCredentials: true })
       .then(() => logOutUser())
       .catch();
   };

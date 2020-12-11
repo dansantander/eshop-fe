@@ -4,6 +4,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import { setFavorites, setProducts } from '../actions/actionsIndex';
+import URL from '../helpers/url';
 /* eslint-disable no-console */
 class ProductList extends Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class ProductList extends Component {
     let mounted = true;
     const { setFavorites, setProducts } = this.props;
 
-    axios.get('http://localhost:3001/products', { withCredentials: true })
+    axios.get(`${URL}/products`, { withCredentials: true })
+    // axios.get('https://eshop-be-1418.herokuapp.com/products', { withCredentials: true })
       .then(result => {
         if (mounted) {
           this.setState({
@@ -29,7 +31,8 @@ class ProductList extends Component {
         mounted = false;
       });
 
-    axios.get('http://localhost:3001/favorites', { withCredentials: true })
+    axios.get(`${URL}/favorites`, { withCredentials: true })
+    // axios.get('https://eshop-be-1418.herokuapp.com/favorites', { withCredentials: true })
       .then(result => {
         this.setState({
           favorites: result.data.favProducts,

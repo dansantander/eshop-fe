@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Product from '../components/Product';
+import URL from '../helpers/url';
 /* eslint-disable no-console */
 class Favorites extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class Favorites extends Component {
   componentDidMount() {
     let mounted = true;
 
-    axios.get('http://localhost:3001/favorites', { withCredentials: true })
+    axios.get(`${URL}/favorites`, { withCredentials: true })
+    // axios.get('https://eshop-be-1418.herokuapp.com/favorites', { withCredentials: true })
       .then(result => {
         if (mounted) {
           this.setState({

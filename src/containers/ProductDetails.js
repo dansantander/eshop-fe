@@ -4,6 +4,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { setFavorites } from '../actions/actionsIndex';
+import URL from '../helpers/url';
 /* eslint-disable no-console */
 class ProductDetails extends Component {
   static fillStar() {
@@ -35,7 +36,8 @@ class ProductDetails extends Component {
     const { id } = match.params;
     let mounted = true;
 
-    axios.get(`http://localhost:3001/products/${id}`, { withCredentials: true })
+    axios.get(`${URL}/products/${id}`, { withCredentials: true })
+    // axios.get(`https://eshop-be-1418.herokuapp.com/products/${id}`, { withCredentials: true })
       .then(res => {
         if (mounted) {
           this.setState({
@@ -46,7 +48,8 @@ class ProductDetails extends Component {
         }
       });
 
-    axios.get('http://localhost:3001/favorites', { withCredentials: true })
+    axios.get(`${URL}/favorites`, { withCredentials: true })
+    // axios.get('https://eshop-be-1418.herokuapp.com/favorites', { withCredentials: true })
       .then(res => {
         this.setState({
           favorites: res.data.favProducts,
@@ -68,7 +71,8 @@ class ProductDetails extends Component {
     console.log('entered');
     const { match, setFavorites } = this.props;
     const { id } = match.params;
-    axios.post('http://localhost:3001/favorites', {
+    axios.post(`${URL}/favorites`, {
+    // axios.post('https://eshop-be-1418.herokuapp.com/favorites', {
       product_id: id,
     },
     { withCredentials: true })
@@ -88,7 +92,8 @@ class ProductDetails extends Component {
   removeFromFavorites() {
     const { match, setFavorites } = this.props;
     const { id } = match.params;
-    axios.delete(`http://localhost:3001/favorites/${id}`,
+    axios.delete(`${URL}/favorites/${id}`,
+    // axios.delete('https://eshop-be-1418.herokuapp.com/favorites/${id}',
       { withCredentials: true })
       .then(res => {
         if (res.data.status === 'removed') {

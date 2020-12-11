@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logInUser } from '../../actions/actionsIndex';
+import URL from '../../helpers/url';
 
 class Registration extends Component {
   constructor(props) {
@@ -42,7 +43,8 @@ class Registration extends Component {
     const { logInUser } = this.props;
     const { history } = this.props;
 
-    axios.post('http://localhost:3001/registrations', {
+    axios.post(`${URL}/registrations`, {
+    // axios.post('https://eshop-be-1418.herokuapp.com/registrations', {
       user: {
         username,
         email,

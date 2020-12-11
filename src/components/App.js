@@ -12,6 +12,7 @@ import ProductDetails from '../containers/ProductDetails';
 import FavoritesList from '../containers/FavoritesList';
 import Header from './Header';
 import { logInUser } from '../actions/actionsIndex';
+import URL from '../helpers/url';
 
 /* eslint-disable no-console */
 
@@ -19,7 +20,8 @@ const App = props => {
   const { logInUser } = props;
 
   const checkLoginStatus = () => {
-    axios.get('http://localhost:3001/logged_in', { withCredentials: true })
+    axios.get(`${URL}/logged_in`, { withCredentials: true })
+    // axios.get('https://eshop-be-1418.herokuapp.com/logged_in', { withCredentials: true })
       .then(res => {
         if (res.data.logged_in && props.loggedIn === 'NOT_LOGGED_IN') {
           console.log('something');
