@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-/* eslint-disable no-console */
+
 const Product = ({ product, isFav }) => (
   <div className="product col-12 col-md-3 my-4">
     <div className="card">

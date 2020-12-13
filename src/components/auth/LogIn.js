@@ -16,7 +16,6 @@ class LogIn extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  /* eslint-disable no-console */
 
   componentDidUpdate() {
     const { loggedIn, history } = this.props;
@@ -52,8 +51,6 @@ class LogIn extends Component {
         sessionStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/products');
       }
-    }).catch(error => {
-      console.log('registration error', error);
     });
   }
 

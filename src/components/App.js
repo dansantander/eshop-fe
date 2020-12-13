@@ -14,21 +14,19 @@ import Header from './Header';
 import { logInUser } from '../actions/actionsIndex';
 import URL from '../helpers/url';
 
-/* eslint-disable no-console */
-
 const App = props => {
   const { logInUser } = props;
 
   const checkLoginStatus = () => {
-    axios.get(`${URL}/logged_in`, { withCredentials: true })
-      .then(res => {
-        if (res.data.logged_in && props.loggedIn === 'NOT_LOGGED_IN') {
-          logInUser(res.data.user);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (user) {
+      axios.get(`${URL}/logged_in`, { params: { user: user.id } }, { withCredentials: true })
+        .then(res => {
+          if (res.data.logged_in && props.loggedIn === 'NOT_LOGGED_IN') {
+            logInUser(res.data.user);
+          }
+        });
+    }
   };
 
   useEffect(() => {

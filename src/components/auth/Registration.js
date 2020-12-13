@@ -19,7 +19,6 @@ class Registration extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   /* eslint-disable camelcase */
-  /* eslint-disable no-console */
 
   componentDidUpdate() {
     const { loggedIn, history } = this.props;
@@ -57,8 +56,6 @@ class Registration extends Component {
         sessionStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/products');
       }
-    }).catch(error => {
-      console.log('registration error', error);
     });
   }
 

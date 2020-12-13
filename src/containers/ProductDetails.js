@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { setFavorites } from '../actions/actionsIndex';
 import URL from '../helpers/url';
-/* eslint-disable no-console */
+
 class ProductDetails extends Component {
   static fillStar() {
     const star = document.getElementById('heart');
@@ -83,8 +83,6 @@ class ProductDetails extends Component {
           setFavorites(res.data.favProducts);
           ProductDetails.fillStar();
         }
-      }).catch(error => {
-        console.log('create favorite error', error);
       });
   }
 
@@ -102,15 +100,13 @@ class ProductDetails extends Component {
           setFavorites(res.data.favProducts);
           ProductDetails.outlineStar();
         }
-      }).catch(error => {
-        console.log('favorite delete error', error);
       });
   }
 
   render() {
     const isFavorite = this.findInFavorites();
-    const { product, isLoading, favorites } = this.state;
-    console.log('state favorites', favorites);
+    const { product, isLoading } = this.state;
+
     return (
       <>
         { !isLoading ? (
