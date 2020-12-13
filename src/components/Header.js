@@ -12,9 +12,7 @@ const Header = props => {
   const logOut = () => {
     const { logOutUser } = props;
     axios.delete(`${URL}/logged_out`, { withCredentials: true })
-    // axios.delete('https://eshop-be-1418.herokuapp.com/logged_out', { withCredentials: true })
-      .then(() => logOutUser())
-      .catch();
+      .then(() => logOutUser());
   };
 
   const { loggedIn, user } = props;
@@ -48,11 +46,10 @@ const Header = props => {
         </Dropdown>
         <h1 className="logo"> mallster </h1>
         <div className="align-self-center">
-          Welcome,
-          {' '}
           <b>{user.username}</b>
           {' '}
-          !
+          <i className="far fa-user-circle" />
+          {' '}
         </div>
         <div className="cart">
           <i className="fas fa-bell" />

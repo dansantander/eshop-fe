@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import { setFavorites, setProducts } from '../actions/actionsIndex';
 import URL from '../helpers/url';
-/* eslint-disable no-console */
+
 class ProductList extends Component {
   constructor(props) {
     super(props);
@@ -17,10 +17,9 @@ class ProductList extends Component {
 
   componentDidMount() {
     let mounted = true;
-    const { setFavorites, setProducts } = this.props;
+    const { setProducts } = this.props;
 
     axios.get(`${URL}/products`, { withCredentials: true })
-    // axios.get('https://eshop-be-1418.herokuapp.com/products', { withCredentials: true })
       .then(result => {
         if (mounted) {
           this.setState({
@@ -30,14 +29,20 @@ class ProductList extends Component {
         setProducts(result.data.products);
         mounted = false;
       });
+  }
 
-    axios.get(`${URL}/favorites`, { withCredentials: true })
-    // axios.get('https://eshop-be-1418.herokuapp.com/favorites', { withCredentials: true })
+  componentDidUpdate() {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    const { favorites } = this.state;
+    const { setFavorites } = this.props;
+    axios.get(`${URL}/favorites`, { params: { user: user.id } }, { withCredentials: true })
       .then(result => {
-        this.setState({
-          favorites: result.data.favProducts,
-        });
-        setFavorites(result.data.favProducts);
+        if (JSON.stringify(favorites) !== JSON.stringify(result.data.favProducts)) {
+          this.setState({
+            favorites: result.data.favProducts,
+          });
+          setFavorites(result.data.favProducts);
+        }
       });
   }
 

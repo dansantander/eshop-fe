@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Product from '../components/Product';
 import URL from '../helpers/url';
-/* eslint-disable no-console */
+
 class Favorites extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      favProducts: [],
+      favorites: [],
     };
   }
 
   componentDidMount() {
+    const user = JSON.parse(sessionStorage.getItem('user'));
     let mounted = true;
 
-    axios.get(`${URL}/favorites`, { withCredentials: true })
-    // axios.get('https://eshop-be-1418.herokuapp.com/favorites', { withCredentials: true })
+    axios.get(`${URL}/favorites`, { params: { user: user.id } }, { withCredentials: true })
       .then(result => {
         if (mounted) {
           this.setState({
-            favProducts: result.data.favProducts,
+            favorites: result.data.favProducts,
           });
           mounted = false;
         }
@@ -27,7 +27,7 @@ class Favorites extends Component {
   }
 
   render() {
-    const { favProducts } = this.state;
+    const { favorites } = this.state;
 
     return (
       <div>
@@ -37,8 +37,8 @@ class Favorites extends Component {
           </div>
           <div className="row">
             {
-              favProducts.map(p => (
-                <Product key={p.id} product={p} />
+              favorites.map(p => (
+                <Product key={p.id} product={p} isFav={favorites.some(f => f.id === p.id)} />
               ))
             }
           </div>

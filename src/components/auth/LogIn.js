@@ -41,7 +41,6 @@ class LogIn extends Component {
     const { history } = this.props;
 
     axios.post(`${URL}/sessions`, {
-    // axios.post('https://eshop-be-1418.herokuapp.com/sessions', {
       user: {
         email,
         password,

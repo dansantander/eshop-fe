@@ -32,12 +32,12 @@ class ProductDetails extends Component {
   }
 
   componentDidMount() {
+    const user = JSON.parse(sessionStorage.getItem('user'));
     const { match } = this.props;
     const { id } = match.params;
     let mounted = true;
 
     axios.get(`${URL}/products/${id}`, { withCredentials: true })
-    // axios.get(`https://eshop-be-1418.herokuapp.com/products/${id}`, { withCredentials: true })
       .then(res => {
         if (mounted) {
           this.setState({
@@ -48,8 +48,7 @@ class ProductDetails extends Component {
         }
       });
 
-    axios.get(`${URL}/favorites`, { withCredentials: true })
-    // axios.get('https://eshop-be-1418.herokuapp.com/favorites', { withCredentials: true })
+    axios.get(`${URL}/favorites`, { params: { user: user.id } }, { withCredentials: true })
       .then(res => {
         this.setState({
           favorites: res.data.favProducts,
@@ -68,12 +67,12 @@ class ProductDetails extends Component {
   }
 
   addToFavorites() {
-    console.log('entered');
+    const user = JSON.parse(sessionStorage.getItem('user'));
     const { match, setFavorites } = this.props;
     const { id } = match.params;
     axios.post(`${URL}/favorites`, {
-    // axios.post('https://eshop-be-1418.herokuapp.com/favorites', {
       product_id: id,
+      user: user.id,
     },
     { withCredentials: true })
       .then(res => {
@@ -90,10 +89,10 @@ class ProductDetails extends Component {
   }
 
   removeFromFavorites() {
+    const user = JSON.parse(sessionStorage.getItem('user'));
     const { match, setFavorites } = this.props;
     const { id } = match.params;
-    axios.delete(`${URL}/favorites/${id}`,
-    // axios.delete('https://eshop-be-1418.herokuapp.com/favorites/${id}',
+    axios.delete(`${URL}/favorites/${id}`, { user: user.id },
       { withCredentials: true })
       .then(res => {
         if (res.data.status === 'removed') {

@@ -21,10 +21,8 @@ const App = props => {
 
   const checkLoginStatus = () => {
     axios.get(`${URL}/logged_in`, { withCredentials: true })
-    // axios.get('https://eshop-be-1418.herokuapp.com/logged_in', { withCredentials: true })
       .then(res => {
         if (res.data.logged_in && props.loggedIn === 'NOT_LOGGED_IN') {
-          console.log('something');
           logInUser(res.data.user);
         }
       })
@@ -38,7 +36,6 @@ const App = props => {
   });
 
   const { loggedIn } = props;
-  console.log('loggedIn', loggedIn);
 
   return (
     <div className="App">
