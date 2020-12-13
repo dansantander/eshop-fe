@@ -154,7 +154,11 @@ class ProductDetails extends Component {
             </div>
           </div>
         ) : (
-          <h3>Loading...</h3>
+          <div className="container my-5">
+            <div className="section-title">
+              <h3>Loading...</h3>
+            </div>
+          </div>
         )}
       </>
     );

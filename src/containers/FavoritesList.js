@@ -8,6 +8,7 @@ class Favorites extends Component {
     super(props);
     this.state = {
       favorites: [],
+      isLoading: true,
     };
   }
 
@@ -20,6 +21,7 @@ class Favorites extends Component {
         if (mounted) {
           this.setState({
             favorites: result.data.favProducts,
+            isLoading: false,
           });
           mounted = false;
         }
@@ -27,23 +29,34 @@ class Favorites extends Component {
   }
 
   render() {
-    const { favorites } = this.state;
+    const { favorites, isLoading } = this.state;
 
     return (
-      <div>
-        <div className="container  my-5">
-          <div className="section-title">
-            <h1>My Favorites</h1>
+      <>
+        { !isLoading ? (
+          <div>
+            <div className="container  my-5">
+              <div className="section-title">
+                <h1>My Favorites</h1>
+              </div>
+              <div className="row">
+                {
+                  favorites.map(p => (
+                    <Product key={p.id} product={p} isFav={favorites.some(f => f.id === p.id)} />
+                  ))
+                }
+              </div>
+            </div>
           </div>
-          <div className="row">
-            {
-              favorites.map(p => (
-                <Product key={p.id} product={p} isFav={favorites.some(f => f.id === p.id)} />
-              ))
-            }
-          </div>
-        </div>
-      </div>
+        )
+          : (
+            <div className="container my-5">
+              <div className="section-title">
+                <h3>Loading...</h3>
+              </div>
+            </div>
+          )}
+      </>
     );
   }
 }

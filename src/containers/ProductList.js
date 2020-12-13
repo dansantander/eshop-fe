@@ -12,6 +12,7 @@ class ProductList extends Component {
     this.state = {
       products: [],
       favorites: [],
+      isLoading: true,
     };
   }
 
@@ -24,6 +25,7 @@ class ProductList extends Component {
         if (mounted) {
           this.setState({
             products: result.data.products,
+            isLoading: false,
           });
         }
         setProducts(result.data.products);
@@ -47,26 +49,36 @@ class ProductList extends Component {
   }
 
   render() {
-    const { products, favorites } = this.state;
+    const { products, favorites, isLoading } = this.state;
     return (
-      <div>
-        <div className="container my-5">
-          <div className="section-title">
-            <h1>Products</h1>
+      <>
+        { !isLoading ? (
+          <div>
+            <div className="container my-5">
+              <div className="section-title">
+                <h1>Products</h1>
+              </div>
+              <div className="row">
+                {
+                  products.map(p => (
+                    <Product
+                      key={p.id}
+                      product={p}
+                      isFav={favorites.some(f => f.id === p.id)}
+                    />
+                  ))
+                }
+              </div>
+            </div>
           </div>
-          <div className="row">
-            {
-              products.map(p => (
-                <Product
-                  key={p.id}
-                  product={p}
-                  isFav={favorites.some(f => f.id === p.id)}
-                />
-              ))
-            }
+        ) : (
+          <div className="container my-5">
+            <div className="section-title">
+              <h3>Loading...</h3>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
+      </>
     );
   }
 }
