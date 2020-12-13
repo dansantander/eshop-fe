@@ -2,17 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { logOutUser } from '../actions/actionsIndex';
-import URL from '../helpers/url';
-/* eslint-disable no-console */
 
 const Header = props => {
   const logOut = () => {
     const { logOutUser } = props;
-    axios.delete(`${URL}/logged_out`, { withCredentials: true })
-      .then(() => logOutUser());
+    logOutUser();
+    sessionStorage.removeItem('user');
   };
 
   const { loggedIn, user } = props;

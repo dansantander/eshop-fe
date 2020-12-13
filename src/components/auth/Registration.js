@@ -44,7 +44,6 @@ class Registration extends Component {
     const { history } = this.props;
 
     axios.post(`${URL}/registrations`, {
-    // axios.post('https://eshop-be-1418.herokuapp.com/registrations', {
       user: {
         username,
         email,
