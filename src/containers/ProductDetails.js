@@ -113,41 +113,43 @@ class ProductDetails extends Component {
       <>
         { !isLoading ? (
           <div className="container">
-            <div className="card product-details my-5">
-              {isFavorite
-                ? (
-                  <i
-                    id="heart"
-                    tabIndex={0}
-                    role="button"
-                    aria-label="Mute volume"
-                    className="fas fa-heart" // heart filled
-                    onClick={() => this.removeFromFavorites()}
-                    onKeyDown={() => this.removeFromFavorites()}
-                  />
-                )
-                : (
-                  <i
-                    id="heart"
-                    tabIndex={0}
-                    role="button"
-                    aria-label="Mute volume"
-                    className="far fa-heart"
-                    onClick={() => this.addToFavorites()}
-                    onKeyDown={() => this.addToFavorites()}
-                  />
-                )}
-              <img alt="" className="card-img-top" src={product.image} />
-              <div className="card-body">
-                <h3 className="product-name" data-testid="Title">
-                  {product.name}
-                </h3>
-                <p className="" data-testid="Actors">
-                  {product.description}
-                </p>
-                <h3 className="">
-                  {product.price}
-                </h3>
+            <div className="row">
+              <div className="card product-details my-5 col-12 col-md-6 col-lg-4">
+                {isFavorite
+                  ? (
+                    <i
+                      id="heart"
+                      tabIndex={0}
+                      role="button"
+                      aria-label="Mute volume"
+                      className="fas fa-heart" // heart filled
+                      onClick={() => this.removeFromFavorites()}
+                      onKeyDown={() => this.removeFromFavorites()}
+                    />
+                  )
+                  : (
+                    <i
+                      id="heart"
+                      tabIndex={0}
+                      role="button"
+                      aria-label="Mute volume"
+                      className="far fa-heart"
+                      onClick={() => this.addToFavorites()}
+                      onKeyDown={() => this.addToFavorites()}
+                    />
+                  )}
+                <img alt="" className="card-img-top" src={product.image} />
+                <div className="card-body">
+                  <h3 className="product-name" data-testid="Title">
+                    {product.name}
+                  </h3>
+                  <p className="" data-testid="Actors">
+                    {product.description}
+                  </p>
+                  <h3 className="">
+                    {product.price}
+                  </h3>
+                </div>
               </div>
             </div>
           </div>

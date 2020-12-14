@@ -79,10 +79,14 @@ h5 {
   }
 }
 
-.nav-top {
+.nav-container {
   background-color: #ff5617;
   color: #fff;
   box-shadow: 1px 4px 5px rgb(182, 182, 182);
+  border-bottom: 0 !important;
+}
+
+.nav-top {
   border-bottom: 0 !important;
 
   .dropdown {

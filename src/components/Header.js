@@ -15,44 +15,48 @@ const Header = props => {
   const { loggedIn, user } = props;
   if (loggedIn === 'LOGGED_IN') {
     return (
-      <div
-        id="nav-links"
-        className="nav-top pl-3 py-2 w-100 border-bottom d-flex justify-content-around align-items-center"
-      >
-        <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-            <i className="fas fa-bars" />
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
+      <div className="nav-container">
+        <div
+          id="nav-links"
+          className="container nav-top pl-3 py-2 w-100 border-bottom d-flex justify-content-around align-items-center"
+        >
+          <Dropdown>
+            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+              <i className="fas fa-bars" />
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
 
-            <Dropdown.Item as={Link} to="/products" className="pl-2">
-              All Products
-            </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/products" className="pl-2">
+                All Products
+              </Dropdown.Item>
 
-            <Dropdown.Item as={Link} to="/favorites" className="pl-2">
-              Favorite Products
-            </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/favorites" className="pl-2">
+                Favorite Products
+              </Dropdown.Item>
 
-            <Dropdown.Divider />
+              <Dropdown.Divider />
 
-            <Dropdown.Item onSelect={() => logOut()} className="pl-2">
-              LogOut
-            </Dropdown.Item>
+              <Dropdown.Item onSelect={() => logOut()} className="pl-2">
+                LogOut
+              </Dropdown.Item>
 
-          </Dropdown.Menu>
-        </Dropdown>
-        <h1 className="logo"> mallster </h1>
-        <div className="align-self-center">
-          <b>{user.username}</b>
-          {' '}
-          <i className="far fa-user-circle" />
-          {' '}
-        </div>
-        <div className="cart">
-          <i className="fas fa-bell" />
-        </div>
-        <div className="cart">
-          <i className="fas fa-shopping-cart" />
+            </Dropdown.Menu>
+          </Dropdown>
+          <h1 className="logo"> mallster </h1>
+          <div className="icons d-flex">
+            <div className="align-self-center mx-2">
+              <b>{user.username}</b>
+              {' '}
+              <i className="far fa-user-circle" />
+              {' '}
+            </div>
+            <div className="cart">
+              <i className="fas fa-bell" />
+            </div>
+            <div className="cart ml-1">
+              <i className="fas fa-shopping-cart" />
+            </div>
+          </div>
         </div>
       </div>
     );

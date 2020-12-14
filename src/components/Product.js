@@ -3,7 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Product = ({ product, isFav }) => (
-  <div className="product col-12 col-md-3 my-4">
+  <div className="product col-12 col-md-4 col-lg-3 my-4">
     <div className="card">
       {isFav
         ? (
