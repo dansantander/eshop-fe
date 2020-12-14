@@ -1,4 +1,4 @@
-# MALLSTER API
+# MALLSTER
 >  A browser based mobile application that gathers all of the most common mall's brands for you to buy directly from your favorite shops.
 
 ![cover](./public/mallster.png)
@@ -8,7 +8,6 @@
 * [Features](#features)
 * [Live Demo](#demo)
 * [Installation](#installation)
-* [Getting Started](#getting-started)
 * [Built With](#built-with)
 * [Contributing](#contributing)
 * [Acknowledgments](#acknowledgments)
