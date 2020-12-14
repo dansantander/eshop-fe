@@ -90,8 +90,10 @@ class ProductDetails extends Component {
     const user = JSON.parse(sessionStorage.getItem('user'));
     const { match, setFavorites } = this.props;
     const { id } = match.params;
-    axios.delete(`${URL}/favorites/${id}`, { user: user.id },
-      { withCredentials: true })
+    axios.delete(`${URL}/favorites/${id}`, {
+      data: user.id,
+    },
+    { withCredentials: true })
       .then(res => {
         if (res.data.status === 'removed') {
           this.setState({
