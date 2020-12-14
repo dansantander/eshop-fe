@@ -27,7 +27,7 @@ at the top of a product.
 
 ## Demo
 
-  - https://eshop-be-1418.herokuapp.com
+  - https://eloquent-montalcini-bccf89.netlify.app
 
 ## Installation
 

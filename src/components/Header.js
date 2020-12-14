@@ -63,11 +63,13 @@ const Header = props => {
   }
 
   return (
-    <div
-      id="nav-links"
-      className="nav-top pl-3 py-2 w-100 border-bottom d-flex justify-content-center"
-    >
-      <h1 className="logo"> mallster </h1>
+    <div className="nav-container">
+      <div
+        id="nav-links"
+        className="nav-top pl-3 py-2 w-100 border-bottom d-flex justify-content-center"
+      >
+        <h1 className="logo"> mallster </h1>
+      </div>
     </div>
   );
 };
