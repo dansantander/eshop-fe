@@ -3,7 +3,6 @@ import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import Registration from './auth/Registration';
 import LogIn from './auth/LogIn';
@@ -12,20 +11,14 @@ import ProductDetails from '../containers/ProductDetails';
 import FavoritesList from '../containers/FavoritesList';
 import Header from './Header';
 import { logInUser } from '../actions/actionsIndex';
-import URL from '../helpers/url';
 
 const App = props => {
   const { logInUser } = props;
 
   const checkLoginStatus = () => {
     const user = JSON.parse(sessionStorage.getItem('user'));
-    if (user) {
-      axios.get(`${URL}/logged_in`, { params: { user: user.id } }, { withCredentials: true })
-        .then(res => {
-          if (res.data.logged_in && props.loggedIn === 'NOT_LOGGED_IN') {
-            logInUser(res.data.user);
-          }
-        });
+    if (user && props.loggedIn === 'NOT_LOGGED_IN') {
+      logInUser(user);
     }
   };
 

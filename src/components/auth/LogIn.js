@@ -46,7 +46,7 @@ class LogIn extends Component {
       },
     },
     { withCredentials: true }).then(response => {
-      if (response.data.status === 'created') {
+      if (response.data.logged_in) {
         logInUser(response.data.user);
         sessionStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/products');

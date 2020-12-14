@@ -51,7 +51,7 @@ class Registration extends Component {
       },
     },
     { withCredentials: true }).then(response => {
-      if (response.data.status === 'created') {
+      if (response.data.signed_in) {
         logInUser(response.data.user);
         sessionStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/products');
