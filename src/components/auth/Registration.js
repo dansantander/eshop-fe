@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logInUser } from '../../actions/actionsIndex';
 import URL from '../../helpers/url';
-
+/* eslint-disable no-console */
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +56,7 @@ class Registration extends Component {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/products');
       }
-    });
+    }).catch(error => console.log('inside catch', error.response.data.errors));
   }
 
   render() {
