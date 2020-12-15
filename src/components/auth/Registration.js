@@ -43,7 +43,7 @@ class Registration extends Component {
     const { history } = this.props;
 
     axios.post(`${URL}/registrations`, {
-      user: {
+      registration: {
         username,
         email,
         password,
@@ -53,7 +53,7 @@ class Registration extends Component {
     { withCredentials: true }).then(response => {
       if (response.data.signed_in) {
         logInUser(response.data.user);
-        sessionStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/products');
       }
     });

@@ -13,7 +13,7 @@ class Favorites extends Component {
   }
 
   componentDidMount() {
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     let mounted = true;
 
     axios.get(`${URL}/favorites`, { params: { user: user.id } }, { withCredentials: true })

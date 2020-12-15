@@ -16,7 +16,7 @@ const App = props => {
   const { logInUser } = props;
 
   const checkLoginStatus = () => {
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     if (user && props.loggedIn === 'NOT_LOGGED_IN') {
       logInUser(user);
     }

@@ -32,7 +32,7 @@ class ProductDetails extends Component {
   }
 
   componentDidMount() {
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     const { match } = this.props;
     const { id } = match.params;
     let mounted = true;
@@ -67,16 +67,18 @@ class ProductDetails extends Component {
   }
 
   addToFavorites() {
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     const { match, setFavorites } = this.props;
     const { id } = match.params;
+    // eslint-disable-next-line
+    console.log('user', user);
     axios.post(`${URL}/favorites`, {
       product_id: id,
       user: user.id,
     },
     { withCredentials: true })
       .then(res => {
-        if (res.data.status === 'created') {
+        if (res.data.success) {
           this.setState({
             favorites: res.data.favProducts,
           });
@@ -87,7 +89,7 @@ class ProductDetails extends Component {
   }
 
   removeFromFavorites() {
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     const { match, setFavorites } = this.props;
     const { id } = match.params;
     axios.delete(`${URL}/favorites/${id}`, {
@@ -95,7 +97,7 @@ class ProductDetails extends Component {
     },
     { withCredentials: true })
       .then(res => {
-        if (res.data.status === 'removed') {
+        if (res.data.success) {
           this.setState({
             favorites: res.data.favProducts,
           });

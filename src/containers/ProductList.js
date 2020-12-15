@@ -34,7 +34,7 @@ class ProductList extends Component {
   }
 
   componentDidUpdate() {
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     const { favorites } = this.state;
     const { setFavorites } = this.props;
     axios.get(`${URL}/favorites`, { params: { user: user.id } }, { withCredentials: true })

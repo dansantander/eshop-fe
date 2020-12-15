@@ -9,7 +9,7 @@ const Header = props => {
   const logOut = () => {
     const { logOutUser } = props;
     logOutUser();
-    sessionStorage.removeItem('user');
+    localStorage.removeItem('user');
   };
 
   const { loggedIn, user } = props;

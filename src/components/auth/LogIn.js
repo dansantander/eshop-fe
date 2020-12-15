@@ -40,7 +40,7 @@ class LogIn extends Component {
     const { history } = this.props;
 
     axios.post(`${URL}/sessions`, {
-      user: {
+      session: {
         email,
         password,
       },
@@ -48,7 +48,7 @@ class LogIn extends Component {
     { withCredentials: true }).then(response => {
       if (response.data.logged_in) {
         logInUser(response.data.user);
-        sessionStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         history.push('/products');
       }
     });
