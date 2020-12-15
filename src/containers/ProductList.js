@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+// import axios from 'axios';
 import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import { setFavorites, setProducts } from '../actions/actionsIndex';
-import URL from '../helpers/url';
+import mallsterApi from '../utils/api';
 
 class ProductList extends Component {
   constructor(props) {
@@ -19,8 +19,7 @@ class ProductList extends Component {
   componentDidMount() {
     let mounted = true;
     const { setProducts } = this.props;
-
-    axios.get(`${URL}/products`, { withCredentials: true })
+    mallsterApi.getProducts()
       .then(result => {
         if (mounted) {
           this.setState({
@@ -37,7 +36,7 @@ class ProductList extends Component {
     const user = JSON.parse(localStorage.getItem('user'));
     const { favorites } = this.state;
     const { setFavorites } = this.props;
-    axios.get(`${URL}/favorites`, { params: { user: user.id } }, { withCredentials: true })
+    mallsterApi.getFavorites(user)
       .then(result => {
         if (JSON.stringify(favorites) !== JSON.stringify(result.data.favProducts)) {
           this.setState({

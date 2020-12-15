@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Product from '../components/Product';
-import URL from '../helpers/url';
+import mallsterApi from '../utils/api';
 
 class Favorites extends Component {
   constructor(props) {
@@ -15,8 +14,7 @@ class Favorites extends Component {
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem('user'));
     let mounted = true;
-
-    axios.get(`${URL}/favorites`, { params: { user: user.id } }, { withCredentials: true })
+    mallsterApi.getFavorites(user)
       .then(result => {
         if (mounted) {
           this.setState({

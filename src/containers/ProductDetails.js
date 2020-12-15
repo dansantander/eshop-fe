@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { setFavorites } from '../actions/actionsIndex';
-import URL from '../helpers/url';
+import mallsterApi from '../utils/api';
 
 class ProductDetails extends Component {
   static fillStar() {
@@ -37,7 +36,7 @@ class ProductDetails extends Component {
     const { id } = match.params;
     let mounted = true;
 
-    axios.get(`${URL}/products/${id}`, { withCredentials: true })
+    mallsterApi.getSingleProduct(id)
       .then(res => {
         if (mounted) {
           this.setState({
@@ -48,7 +47,7 @@ class ProductDetails extends Component {
         }
       });
 
-    axios.get(`${URL}/favorites`, { params: { user: user.id } }, { withCredentials: true })
+    mallsterApi.getFavorites(user)
       .then(res => {
         this.setState({
           favorites: res.data.favProducts,
@@ -70,13 +69,8 @@ class ProductDetails extends Component {
     const user = JSON.parse(localStorage.getItem('user'));
     const { match, setFavorites } = this.props;
     const { id } = match.params;
-    // eslint-disable-next-line
-    console.log('user', user);
-    axios.post(`${URL}/favorites`, {
-      product_id: id,
-      user: user.id,
-    },
-    { withCredentials: true })
+
+    mallsterApi.addFavorite(user, id)
       .then(res => {
         if (res.data.success) {
           this.setState({
@@ -92,10 +86,8 @@ class ProductDetails extends Component {
     const user = JSON.parse(localStorage.getItem('user'));
     const { match, setFavorites } = this.props;
     const { id } = match.params;
-    axios.delete(`${URL}/favorites/${id}`, {
-      data: user.id,
-    },
-    { withCredentials: true })
+
+    mallsterApi.removeFavorite(user, id)
       .then(res => {
         if (res.data.success) {
           this.setState({

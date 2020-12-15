@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logInUser } from '../../actions/actionsIndex';
-import URL from '../../helpers/url';
+import mallsterApi from '../../utils/api';
 /* eslint-disable no-console */
 class LogIn extends Component {
   constructor(props) {
@@ -39,19 +38,14 @@ class LogIn extends Component {
     const { logInUser } = this.props;
     const { history } = this.props;
 
-    axios.post(`${URL}/sessions`, {
-      session: {
-        email,
-        password,
-      },
-    },
-    { withCredentials: true }).then(response => {
-      if (response.data.logged_in) {
-        logInUser(response.data.user);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        history.push('/products');
-      }
-    }).catch(error => console.log('inside catch', error.response.data.errors));
+    mallsterApi.signInUser(email, password)
+      .then(response => {
+        if (response.data.logged_in) {
+          logInUser(response.data.user);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          history.push('/products');
+        }
+      }).catch(() => console.log('inside catch'));
   }
 
   render() {

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logInUser } from '../../actions/actionsIndex';
-import URL from '../../helpers/url';
+
+import mallsterApi from '../../utils/api';
 /* eslint-disable no-console */
+/* eslint-disable camelcase */
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,6 @@ class Registration extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  /* eslint-disable camelcase */
 
   componentDidUpdate() {
     const { loggedIn, history } = this.props;
@@ -42,21 +43,14 @@ class Registration extends Component {
     const { logInUser } = this.props;
     const { history } = this.props;
 
-    axios.post(`${URL}/registrations`, {
-      registration: {
-        username,
-        email,
-        password,
-        password_confirmation,
-      },
-    },
-    { withCredentials: true }).then(response => {
-      if (response.data.signed_in) {
-        logInUser(response.data.user);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        history.push('/products');
-      }
-    }).catch(error => console.log('inside catch', error.response.data.errors));
+    mallsterApi.signUpUser(username, email, password, password_confirmation)
+      .then(response => {
+        if (response.data.signed_in) {
+          logInUser(response.data.user);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          history.push('/products');
+        }
+      }).catch(error => console.log('inside catch', error.response.data.errors));
   }
 
   render() {
