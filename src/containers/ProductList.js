@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import axios from 'axios';
 import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import { setFavorites, setProducts } from '../actions/actionsIndex';

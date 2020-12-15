@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import mallsterApi from '../utils/api';
+import { setProducts } from '../actions/actionsIndex';
 
 class Favorites extends Component {
   constructor(props) {
     super(props);
     this.state = {
       favorites: [],
+      products: [],
       isLoading: true,
     };
   }
 
   componentDidMount() {
+    const { products } = this.state;
+    const { setProducts } = this.props;
+    setProducts(products);
     const user = JSON.parse(localStorage.getItem('user'));
     let mounted = true;
     mallsterApi.getFavorites(user)
@@ -59,4 +66,14 @@ class Favorites extends Component {
   }
 }
 
-export default Favorites;
+const mapDispatchToProps = dispatch => ({
+  setProducts: products => {
+    dispatch(setProducts(products));
+  },
+});
+
+Favorites.propTypes = {
+  setProducts: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Favorites);
