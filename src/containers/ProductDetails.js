@@ -23,6 +23,7 @@ class ProductDetails extends Component {
     this.state = {
       product: {},
       favorites: [],
+      messages: '',
       isLoading: true,
     };
 
@@ -75,10 +76,15 @@ class ProductDetails extends Component {
         if (res.data.success) {
           this.setState({
             favorites: res.data.favProducts,
+            messages: res.data.success,
           });
           setFavorites(res.data.favProducts);
           ProductDetails.fillStar();
         }
+      }).catch(errors => {
+        this.setState({
+          messages: errors.response.data.errors,
+        });
       });
   }
 
@@ -92,16 +98,21 @@ class ProductDetails extends Component {
         if (res.data.success) {
           this.setState({
             favorites: res.data.favProducts,
+            messages: res.data.success,
           });
           setFavorites(res.data.favProducts);
           ProductDetails.outlineStar();
         }
+      }).catch(errors => {
+        this.setState({
+          messages: errors.response.data.errors,
+        });
       });
   }
 
   render() {
     const isFavorite = this.findInFavorites();
-    const { product, isLoading } = this.state;
+    const { product, isLoading, messages } = this.state;
 
     return (
       <>
@@ -137,13 +148,15 @@ class ProductDetails extends Component {
                   <h3 className="product-name" data-testid="Title">
                     {product.name}
                   </h3>
-                  <p className="" data-testid="Actors">
+                  <p data-testid="Actors">
                     {product.description}
                   </p>
-                  <h3 className="">
+                  <h3>
+                    $
                     {product.price}
                   </h3>
                 </div>
+                { messages !== '' ? <div className="success">{messages}</div> : ''}
               </div>
             </div>
           </div>
