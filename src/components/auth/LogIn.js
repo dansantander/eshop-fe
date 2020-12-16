@@ -11,6 +11,7 @@ class LogIn extends Component {
     this.state = {
       email: '',
       password: '',
+      submissionErrors: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -45,12 +46,16 @@ class LogIn extends Component {
           localStorage.setItem('user', JSON.stringify(response.data.user));
           history.push('/products');
         }
-      }).catch(() => console.log('inside catch'));
+      }).catch(errors => {
+        this.setState({
+          submissionErrors: errors.response.data.errors,
+        });
+      });
   }
 
   render() {
     const {
-      email, password,
+      email, password, submissionErrors,
     } = this.state;
     return (
       <div className="login-container d-flex justify-content-center align-items-center">
@@ -85,6 +90,7 @@ class LogIn extends Component {
             </div>
             <button className="btn btn-info my-3" type="submit">Sign In</button>
           </form>
+          { submissionErrors !== '' ? <span className="submissionErrors">{submissionErrors}</span> : ''}
           <div>
             <p>Don&apos;t have an account yet?</p>
             <Link to="/registration">Register</Link>

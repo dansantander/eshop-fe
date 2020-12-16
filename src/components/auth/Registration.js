@@ -16,6 +16,7 @@ class Registration extends Component {
       email: '',
       password: '',
       password_confirmation: '',
+      submissionErrors: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -50,12 +51,17 @@ class Registration extends Component {
           localStorage.setItem('user', JSON.stringify(response.data.user));
           history.push('/products');
         }
-      }).catch(error => console.log('inside catch', error.response.data.errors));
+      }).catch(errors => {
+        console.log('errors', errors.response.data.errors);
+        this.setState({
+          submissionErrors: errors.response.data.errors,
+        });
+      });
   }
 
   render() {
     const {
-      username, email, password, password_confirmation,
+      username, email, password, password_confirmation, submissionErrors,
     } = this.state;
     return (
       <div className="login-container d-flex justify-content-center align-items-center">
@@ -114,6 +120,7 @@ class Registration extends Component {
             </div>
             <button className="btn btn-info my-3" type="submit">Register</button>
           </form>
+          { submissionErrors !== '' ? <span className="submissionErrors">{submissionErrors}</span> : ''}
         </div>
       </div>
     );
