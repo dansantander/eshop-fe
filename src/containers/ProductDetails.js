@@ -23,7 +23,8 @@ class ProductDetails extends Component {
     this.state = {
       product: {},
       favorites: [],
-      messages: '',
+      successMessage: '',
+      errorMessage: '',
       isLoading: true,
     };
 
@@ -76,14 +77,14 @@ class ProductDetails extends Component {
         if (res.data.success) {
           this.setState({
             favorites: res.data.favProducts,
-            messages: res.data.success,
+            successMessage: res.data.success,
           });
           setFavorites(res.data.favProducts);
           ProductDetails.fillStar();
         }
       }).catch(errors => {
         this.setState({
-          messages: errors.response.data.errors,
+          errorMessage: errors.response.data.errors,
         });
       });
   }
@@ -98,21 +99,23 @@ class ProductDetails extends Component {
         if (res.data.success) {
           this.setState({
             favorites: res.data.favProducts,
-            messages: res.data.success,
+            successMessage: res.data.success,
           });
           setFavorites(res.data.favProducts);
           ProductDetails.outlineStar();
         }
       }).catch(errors => {
         this.setState({
-          messages: errors.response.data.errors,
+          errorMessage: errors.response.data.errors,
         });
       });
   }
 
   render() {
     const isFavorite = this.findInFavorites();
-    const { product, isLoading, messages } = this.state;
+    const {
+      product, isLoading, successMessage, errorMessage,
+    } = this.state;
 
     return (
       <>
@@ -156,7 +159,8 @@ class ProductDetails extends Component {
                     {product.price}
                   </h3>
                 </div>
-                { messages !== '' ? <div className="success">{messages}</div> : ''}
+                { successMessage !== '' ? <div className="success">{successMessage}</div> : ''}
+                { errorMessage !== '' ? <div className="error">{errorMessage}</div> : ''}
               </div>
             </div>
           </div>
