@@ -36,7 +36,11 @@ class ProductDetails extends Component {
     const user = JSON.parse(localStorage.getItem('user'));
     const { match } = this.props;
     const { id } = match.params;
+    const { history } = this.props;
     let mounted = true;
+    if (!user) {
+      history.push('/');
+    }
 
     mallsterApi.getSingleProduct(id)
       .then(res => {
@@ -56,6 +60,14 @@ class ProductDetails extends Component {
         });
         setFavorites(res.data.favProducts);
       });
+  }
+
+  componentDidUpdate() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { history } = this.props;
+    if (!user) {
+      history.push('/');
+    }
   }
 
   findInFavorites() {
@@ -192,6 +204,9 @@ ProductDetails.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     }),
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }).isRequired,
 };
 

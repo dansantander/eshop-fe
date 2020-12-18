@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import mallsterApi from '../utils/api';
@@ -16,10 +17,14 @@ class Favorites extends Component {
   }
 
   componentDidMount() {
+    const user = JSON.parse(localStorage.getItem('user'));
     const { products } = this.state;
     const { setProducts } = this.props;
+    const { history } = this.props;
+    if (!user) {
+      history.push('/');
+    }
     setProducts(products);
-    const user = JSON.parse(localStorage.getItem('user'));
     let mounted = true;
     mallsterApi.getFavorites(user)
       .then(result => {
@@ -31,6 +36,14 @@ class Favorites extends Component {
           mounted = false;
         }
       });
+  }
+
+  componentDidUpdate() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { history } = this.props;
+    if (!user) {
+      history.push('/');
+    }
   }
 
   render() {
@@ -66,6 +79,10 @@ class Favorites extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  loggedIn: state.logIn.loggedIn,
+});
+
 const mapDispatchToProps = dispatch => ({
   setProducts: products => {
     dispatch(setProducts(products));
@@ -74,6 +91,9 @@ const mapDispatchToProps = dispatch => ({
 
 Favorites.propTypes = {
   setProducts: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Favorites));

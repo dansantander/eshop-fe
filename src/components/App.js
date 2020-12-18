@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  BrowserRouter, Switch, Route, Redirect,
+  BrowserRouter, Switch, Route,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -26,8 +26,6 @@ const App = props => {
     checkLoginStatus();
   });
 
-  const { loggedIn } = props;
-
   return (
     <div className="App">
       <div>
@@ -36,9 +34,9 @@ const App = props => {
           <Switch>
             <Route exact path="/"><LogIn /></Route>
             <Route exact path="/registration"><Registration /></Route>
-            { loggedIn === 'LOGGED_IN' ? <Route exact path="/products"><ProductList /></Route> : <Redirect to="/" />}
-            { loggedIn === 'LOGGED_IN' ? <Route exact path="/products/:id"><ProductDetails /></Route> : <Redirect to="/" />}
-            { loggedIn === 'LOGGED_IN' ? <Route exact path="/favorites"><FavoritesList /></Route> : <Redirect to="/" />}
+            <Route exact path="/products"><ProductList /></Route>
+            <Route exact path="/products/:id"><ProductDetails /></Route>
+            <Route exact path="/favorites"><FavoritesList /></Route>
           </Switch>
         </BrowserRouter>
       </div>

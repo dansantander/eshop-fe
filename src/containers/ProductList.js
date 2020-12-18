@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import { setFavorites, setProducts } from '../actions/actionsIndex';
@@ -16,8 +17,13 @@ class ProductList extends Component {
   }
 
   componentDidMount() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { history } = this.props;
     let mounted = true;
     const { setProducts } = this.props;
+    if (!user) {
+      history.push('/');
+    }
     mallsterApi.getProducts()
       .then(result => {
         if (mounted) {
@@ -35,18 +41,24 @@ class ProductList extends Component {
     const user = JSON.parse(localStorage.getItem('user'));
     const { favorites } = this.state;
     const { setFavorites } = this.props;
-    mallsterApi.getFavorites(user)
-      .then(result => {
-        if (JSON.stringify(favorites) !== JSON.stringify(result.data.favProducts)) {
-          this.setState({
-            favorites: result.data.favProducts,
-          });
-          setFavorites(result.data.favProducts);
-        }
-      });
+    if (user) {
+      mallsterApi.getFavorites(user)
+        .then(result => {
+          if (JSON.stringify(favorites) !== JSON.stringify(result.data.favProducts)) {
+            this.setState({
+              favorites: result.data.favProducts,
+            });
+            setFavorites(result.data.favProducts);
+          }
+        });
+    }
   }
 
   render() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      return (<Redirect to="/" />);
+    }
     const { products, favorites, isLoading } = this.state;
     return (
       <>
@@ -81,6 +93,10 @@ class ProductList extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  loggedIn: state.logIn.loggedIn,
+});
+
 const mapDispatchToProps = dispatch => ({
   setFavorites: favorites => {
     dispatch(setFavorites(favorites));
@@ -93,6 +109,9 @@ const mapDispatchToProps = dispatch => ({
 ProductList.propTypes = {
   setFavorites: PropTypes.func.isRequired,
   setProducts: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(ProductList);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

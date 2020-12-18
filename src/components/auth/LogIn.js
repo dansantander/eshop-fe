@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logInUser } from '../../actions/actionsIndex';
 import mallsterApi from '../../utils/api';
-/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 class LogIn extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +17,7 @@ class LogIn extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     const { loggedIn, history } = this.props;
     if (loggedIn === 'LOGGED_IN') {
       history.push('/products');
