@@ -8,6 +8,12 @@ const mallsterApi = (() => {
     return products;
   };
 
+  const getMyProducts = async user => {
+    const response = axios.get(`${URL}/my_products`, { params: { user: user.id } }, { withCredentials: true });
+    const products = await response;
+    return products;
+  };
+
   const getSingleProduct = async id => {
     const response = axios.get(`${URL}/products/${id}`, { withCredentials: true });
     const product = await response;
@@ -63,6 +69,7 @@ const mallsterApi = (() => {
   return {
     getProducts,
     getFavorites,
+    getMyProducts,
     getSingleProduct,
     addFavorite,
     removeFavorite,

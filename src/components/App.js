@@ -11,6 +11,7 @@ import ProductDetails from '../containers/ProductDetails';
 import FavoritesList from '../containers/FavoritesList';
 import Header from './Header';
 import { logInUser } from '../actions/actionsIndex';
+import MyProducts from '../containers/MyProducts';
 
 const App = props => {
   const { logInUser } = props;
@@ -36,6 +37,7 @@ const App = props => {
             <Route exact path="/registration"><Registration /></Route>
             <Route exact path="/products"><ProductList /></Route>
             <Route exact path="/products/:id"><ProductDetails /></Route>
+            <Route exact path="/myproducts"><MyProducts /></Route>
             <Route exact path="/favorites"><FavoritesList /></Route>
           </Switch>
         </BrowserRouter>
