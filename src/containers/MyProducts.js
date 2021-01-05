@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Product from '../components/Product';
 import mallsterApi from '../utils/api';
 import { setProducts } from '../actions/actionsIndex';
@@ -84,4 +85,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(MyProducts);
+export default connect(null, mapDispatchToProps)(withRouter(MyProducts));

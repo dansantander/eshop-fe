@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Product from '../components/Product';
-import { setFavorites, setProducts } from '../actions/actionsIndex';
+import { setFavorites, setMyProducts, setProducts } from '../actions/actionsIndex';
 import mallsterApi from '../utils/api';
 
 class ProductList extends Component {
@@ -11,6 +11,7 @@ class ProductList extends Component {
     super(props);
     this.state = {
       products: [],
+      myProducts: [],
       favorites: [],
       isLoading: true,
     };
@@ -39,8 +40,8 @@ class ProductList extends Component {
 
   componentDidUpdate() {
     const user = JSON.parse(localStorage.getItem('user'));
-    const { favorites } = this.state;
-    const { setFavorites } = this.props;
+    const { favorites, myProducts } = this.state;
+    const { setFavorites, setMyProducts } = this.props;
     if (user) {
       mallsterApi.getFavorites(user)
         .then(result => {
@@ -52,6 +53,17 @@ class ProductList extends Component {
           }
         });
     }
+    if (user) {
+      mallsterApi.getMyProducts(user)
+        .then(result => {
+          if (JSON.stringify(myProducts) !== JSON.stringify(result.data.my_products)) {
+            this.setState({
+              myProducts: result.data.my_products,
+            });
+            setMyProducts(result.data.my_products);
+          }
+        });
+    }
   }
 
   render() {
@@ -59,7 +71,10 @@ class ProductList extends Component {
     if (!user) {
       return (<Redirect to="/" />);
     }
-    const { products, favorites, isLoading } = this.state;
+    const {
+      products, favorites, isLoading,
+      myProducts,
+    } = this.state;
     return (
       <>
         { !isLoading ? (
@@ -75,6 +90,7 @@ class ProductList extends Component {
                       key={p.id}
                       product={p}
                       isFav={favorites.some(f => f.id === p.id)}
+                      isMine={myProducts.some(mp => mp.id === p.id)}
                     />
                   ))
                 }
@@ -104,11 +120,15 @@ const mapDispatchToProps = dispatch => ({
   setProducts: products => {
     dispatch(setProducts(products));
   },
+  setMyProducts: products => {
+    dispatch(setMyProducts(products));
+  },
 });
 
 ProductList.propTypes = {
   setFavorites: PropTypes.func.isRequired,
   setProducts: PropTypes.func.isRequired,
+  setMyProducts: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

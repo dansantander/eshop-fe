@@ -4,6 +4,7 @@ const SET_FAVORITES = 'SET_FAVORITES';
 const ADD_FAVORITE = 'ADD_FAVORITE';
 const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 const SET_PRODUCTS = 'SET_PRODUCTS';
+const SET_MY_PRODUCTS = 'SET_MY_PRODUCTS';
 
 const logInUser = user => ({
   type: LOG_IN_USER,
@@ -18,6 +19,11 @@ const logOutUser = () => ({
 });
 
 const setProducts = products => ({
+  type: SET_PRODUCTS,
+  products,
+});
+
+const setMyProducts = products => ({
   type: SET_PRODUCTS,
   products,
 });
@@ -45,4 +51,5 @@ export {
   addFavorite, ADD_FAVORITE,
   removeFavorite, REMOVE_FAVORITE,
   setProducts, SET_PRODUCTS,
+  setMyProducts, SET_MY_PRODUCTS,
 };

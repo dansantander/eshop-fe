@@ -23,7 +23,7 @@ const Product = ({ product, isFav, isMine }) => (
               )
           ) : (
             <div className="delete py-1 px-1">
-              <i class="fas fa-trash-alt mr-1"/>
+              <i className="fas fa-trash-alt mr-1"/>
               DELETE
             </div>
           )
@@ -52,8 +52,8 @@ const Product = ({ product, isFav, isMine }) => (
 );
 
 Product.propTypes = {
-  isMine: PropTypes.bool.isRequired,
-  isFav: PropTypes.bool.isRequired,
+  isMine: PropTypes.bool,
+  isFav: PropTypes.bool,
   product: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
