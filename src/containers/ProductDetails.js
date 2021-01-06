@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { setFavorites } from '../actions/actionsIndex';
 import mallsterApi from '../utils/api';
-
+/* eslint-disable */
 class ProductDetails extends Component {
   static fillStar() {
     const star = document.getElementById('heart');
@@ -22,6 +22,7 @@ class ProductDetails extends Component {
     super(props);
     this.state = {
       product: {},
+      myProducts: [],
       favorites: [],
       successMessage: '',
       errorMessage: '',
@@ -60,6 +61,13 @@ class ProductDetails extends Component {
         });
         setFavorites(res.data.favProducts);
       });
+
+    mallsterApi.getMyProducts(user)
+      .then(res => {
+        this.setState({
+          myProducts: res.data.my_products,
+        });
+      });
   }
 
   componentDidUpdate() {
@@ -77,6 +85,15 @@ class ProductDetails extends Component {
     const favorite = favorites.some(f => f.id === parseInt(id, 10));
     const isFavorite = favorite;
     return isFavorite;
+  }
+
+  findInProducts() {
+    const { match } = this.props;
+    const { id } = match.params;
+    const { myProducts } = this.state;
+    const product = myProducts.some(p => p.id === parseInt(id, 10));
+    const isMine = product;
+    return isMine;
   }
 
   addToFavorites() {
@@ -125,6 +142,7 @@ class ProductDetails extends Component {
 
   render() {
     const isFavorite = this.findInFavorites();
+    const isMine = this.findInProducts();
     const {
       product, isLoading, successMessage, errorMessage,
     } = this.state;
@@ -135,30 +153,38 @@ class ProductDetails extends Component {
           <div className="container">
             <div className="row">
               <div className="card product-details my-5 col-12 col-md-6 col-lg-4">
-                {isFavorite
-                  ? (
-                    <i
-                      id="heart"
-                      tabIndex={0}
-                      role="button"
-                      aria-label="Mute volume"
-                      className="fas fa-heart" // heart filled
-                      onClick={() => this.removeFromFavorites()}
-                      onKeyDown={() => this.removeFromFavorites()}
-                    />
-                  )
-                  : (
-                    <i
-                      id="heart"
-                      tabIndex={0}
-                      role="button"
-                      aria-label="Mute volume"
-                      className="far fa-heart"
-                      onClick={() => this.addToFavorites()}
-                      onKeyDown={() => this.addToFavorites()}
-                    />
-                  )}
-                <img alt="" className="card-img-top" src={product.image} />
+                {
+                  !isMine
+                    ? (
+                      isFavorite
+                        ? (
+                          <i
+                            id="heart"
+                            tabIndex={0}
+                            role="button"
+                            aria-label="Mute volume"
+                            className="fas fa-heart" // heart filled
+                            onClick={() => this.removeFromFavorites()}
+                            onKeyDown={() => this.removeFromFavorites()}
+                          />
+                        )
+                        : (
+                          <i
+                            id="heart"
+                            tabIndex={0}
+                            role="button"
+                            aria-label="Mute volume"
+                            className="far fa-heart"
+                            onClick={() => this.addToFavorites()}
+                            onKeyDown={() => this.addToFavorites()}
+                          />
+                        )) : (
+                          <div className="delete py-1 px-1">
+                            <i className="fas fa-trash-alt mr-1" />
+                          </div>
+                    )
+                }
+                <img alt="card-image" className="card-img-top mt-3" src={product.image} />
                 <div className="card-body">
                   <h3 className="product-name" data-testid="Title">
                     {product.name}

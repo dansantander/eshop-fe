@@ -22,10 +22,7 @@ const Product = ({ product, isFav, isMine }) => (
                 />
               )
           ) : (
-            <div className="delete py-1 px-1">
-              <i className="fas fa-trash-alt mr-1"/>
-              DELETE
-            </div>
+              <i class="fas fa-edit" />
           )
         }
       <Link
