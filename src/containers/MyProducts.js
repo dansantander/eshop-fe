@@ -66,7 +66,6 @@ class MyProducts extends Component {
             </div>
           </div>
         )}
-        ;
       </>
     );
   }

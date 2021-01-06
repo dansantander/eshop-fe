@@ -140,6 +140,14 @@ class ProductDetails extends Component {
       });
   }
 
+  removeFromMyProducts() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { match, setFavorites } = this.props;
+    const { id } = match.params;
+
+    
+  }
+
   render() {
     const isFavorite = this.findInFavorites();
     const isMine = this.findInProducts();
@@ -153,37 +161,39 @@ class ProductDetails extends Component {
           <div className="container">
             <div className="row">
               <div className="card product-details my-5 col-12 col-md-6 col-lg-4">
-                {
-                  !isMine
-                    ? (
-                      isFavorite
-                        ? (
-                          <i
-                            id="heart"
-                            tabIndex={0}
-                            role="button"
-                            aria-label="Mute volume"
-                            className="fas fa-heart" // heart filled
-                            onClick={() => this.removeFromFavorites()}
-                            onKeyDown={() => this.removeFromFavorites()}
-                          />
-                        )
-                        : (
-                          <i
-                            id="heart"
-                            tabIndex={0}
-                            role="button"
-                            aria-label="Mute volume"
-                            className="far fa-heart"
-                            onClick={() => this.addToFavorites()}
-                            onKeyDown={() => this.addToFavorites()}
-                          />
-                        )) : (
-                          <div className="delete py-1 px-1">
-                            <i className="fas fa-trash-alt mr-1" />
-                          </div>
-                    )
-                }
+                <div className="icons mt-4 mx-3">
+                  {
+                    !isMine
+                      ? (
+                        isFavorite
+                          ? (
+                            <i
+                              id="heart"
+                              tabIndex={0}
+                              role="button"
+                              aria-label="Mute volume"
+                              className="fas fa-heart" // heart filled
+                              onClick={() => this.removeFromFavorites()}
+                              onKeyDown={() => this.removeFromFavorites()}
+                            />
+                          )
+                          : (
+                            <i
+                              id="heart"
+                              tabIndex={0}
+                              role="button"
+                              aria-label="Mute volume"
+                              className="far fa-heart"
+                              onClick={() => this.addToFavorites()}
+                              onKeyDown={() => this.addToFavorites()}
+                            />
+                          )) : (
+                            <div className="edit-delete d-flex flex-column">
+                              <i className="fas fa-trash-alt delete py-1 px-1" />
+                            </div>
+                      )
+                  } 
+                </div>
                 <img alt="card-image" className="card-img-top mt-3" src={product.image} />
                 <div className="card-body">
                   <h3 className="product-name" data-testid="Title">

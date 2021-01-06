@@ -53,7 +53,7 @@ class Favorites extends Component {
       <>
         { !isLoading ? (
           <div>
-            <div className="container  my-5">
+            <div className="container my-5">
               <div className="section-title">
                 <h1>My Favorites</h1>
               </div>

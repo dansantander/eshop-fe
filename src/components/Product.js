@@ -22,7 +22,7 @@ const Product = ({ product, isFav, isMine }) => (
                 />
               )
           ) : (
-              <i class="fas fa-edit" />
+              <i className="fas fa-edit" />
           )
         }
       <Link
