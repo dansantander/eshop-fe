@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Product from '../components/Product';
+import ProductForm from '../components/ProductForm';
 import mallsterApi from '../utils/api';
 import { setProducts } from '../actions/actionsIndex';
 
@@ -46,6 +47,7 @@ class MyProducts extends Component {
               <div className="section-title">
                 <h1>My Products</h1>
               </div>
+              <ProductForm />
               <div className="row">
                 {
                   products.map(p => (
