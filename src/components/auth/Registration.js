@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { logInUser } from '../../actions/actionsIndex';
 
 import mallsterApi from '../../utils/api';
-/* eslint-disable no-console */
 /* eslint-disable camelcase */
 class Registration extends Component {
   constructor(props) {
@@ -52,7 +51,6 @@ class Registration extends Component {
           history.push('/products');
         }
       }).catch(errors => {
-        console.log('errors', errors.response.data.errors);
         this.setState({
           submissionErrors: errors.response.data.errors,
         });

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Product from '../components/Product';
-import ProductForm from '../components/ProductForm';
+import ProductForm from './ProductForm';
 import mallsterApi from '../utils/api';
 import { setProducts } from '../actions/actionsIndex';
 

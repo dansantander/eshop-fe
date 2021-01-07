@@ -146,7 +146,7 @@ class ProductDetails extends Component {
     const { match, setMyProducts } = this.props;
     const { id } = match.params;
 
-    mallsterApi.removeMyProduct(user, id)
+    mallsterApi.removeProduct(user, id)
       .then(res => {
         if (res.data.success) {
           this.setState({
