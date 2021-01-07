@@ -116,7 +116,6 @@ h5 {
 
   img {
     height: 13rem !important;
-    position: relative;
   }
 
   h3 {
@@ -142,6 +141,10 @@ h5 {
   margin: 8px 8px;
 }
 
+.details {
+  margin: 2rem 1.5rem;
+}
+
 .fa-edit {
   color: #ff5050;
   font-size: 1.3rem;
@@ -150,18 +153,10 @@ h5 {
   margin: 8px 8px;
 }
 
-.edit-delete {
-  position: relative;
-
-  .delete {
-    border-radius: 5px;
-    color: rgb(255, 0, 0);
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 1.3rem;
-  }
-}
-
-.delete:hover {
-  background-color: rgba(255, 255, 255, 0.637);
+.fa-trash-alt {
+  color: rgb(255, 0, 0);
+  font-size: 1.3rem;
+  font-weight: 500;
+  position: absolute;
+  z-index: 1;
 }

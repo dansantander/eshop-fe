@@ -20,6 +20,12 @@ const mallsterApi = (() => {
     return product;
   };
 
+  const removeMyProduct = async (user, id) => {
+    const response = axios.delete(`${URL}/products/${id}`, { data: user.id }, { withCredentials: true });
+    const myProducts = await response;
+    return myProducts;
+  };
+
   const getFavorites = async user => {
     const response = axios.get(`${URL}/favorites`, { params: { user: user.id } }, { withCredentials: true });
     const favorites = await response;
@@ -75,6 +81,7 @@ const mallsterApi = (() => {
     removeFavorite,
     signUpUser,
     signInUser,
+    removeMyProduct,
   };
 })();
 
