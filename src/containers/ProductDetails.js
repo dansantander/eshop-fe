@@ -143,7 +143,7 @@ class ProductDetails extends Component {
 
   removeFromMyProducts() {
     const user = JSON.parse(localStorage.getItem('user'));
-    const { match, setMyProducts } = this.props;
+    const { match, setMyProducts, history } = this.props;
     const { id } = match.params;
 
     mallsterApi.removeProduct(user, id)
@@ -202,7 +202,7 @@ class ProductDetails extends Component {
                               onKeyDown={() => this.addToFavorites()}
                             />
                           )) : (
-                            <i 
+                            <i
                               id="trash"
                               tabIndex={0}
                               role="button"

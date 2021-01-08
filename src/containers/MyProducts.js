@@ -5,13 +5,13 @@ import { withRouter } from 'react-router-dom';
 import Product from '../components/Product';
 import ProductForm from './ProductForm';
 import mallsterApi from '../utils/api';
-import { setProducts } from '../actions/actionsIndex';
+import { setMyProducts } from '../actions/actionsIndex';
 
 class MyProducts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [],
+      myProducts: [],
       isLoading: true,
     };
   }
@@ -19,8 +19,8 @@ class MyProducts extends Component {
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem('user'));
     const { history } = this.props;
+    const { setMyProducts } = this.props;
     let mounted = true;
-    const { setProducts } = this.props;
     if (!user) {
       history.push('/');
     }
@@ -28,17 +28,17 @@ class MyProducts extends Component {
       .then(result => {
         if (mounted) {
           this.setState({
-            products: result.data.my_products,
+            myProducts: result.data.my_products,
             isLoading: false,
           });
         }
-        setProducts(result.data.my_products);
+        setMyProducts(result.data.my_products);
         mounted = false;
       });
   }
 
   render() {
-    const { products, isLoading } = this.state;
+    const { myProducts, isLoading } = this.state;
     return (
       <>
         { !isLoading ? (
@@ -50,7 +50,7 @@ class MyProducts extends Component {
               <ProductForm />
               <div className="row">
                 {
-                  products.map(p => (
+                  myProducts.map(p => (
                     <Product
                       key={p.id}
                       product={p}
@@ -73,17 +73,21 @@ class MyProducts extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  myProducts: state.myProducts,
+});
+
 MyProducts.propTypes = {
-  setProducts: PropTypes.func.isRequired,
+  setMyProducts: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  setProducts: products => {
-    dispatch(setProducts(products));
+  setMyProducts: products => {
+    dispatch(setMyProducts(products));
   },
 });
 
-export default connect(null, mapDispatchToProps)(withRouter(MyProducts));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MyProducts));

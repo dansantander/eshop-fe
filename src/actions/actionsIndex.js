@@ -24,7 +24,7 @@ const setProducts = products => ({
 });
 
 const setMyProducts = products => ({
-  type: SET_PRODUCTS,
+  type: SET_MY_PRODUCTS,
   products,
 });
 

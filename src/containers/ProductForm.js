@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import mallsterApi from '../utils/api';
+import { setMyProducts } from '../actions/actionsIndex';
 /* eslint-disable no-console */
 class ProductForm extends Component {
   constructor(props) {
@@ -23,19 +26,17 @@ class ProductForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const user = JSON.parse(localStorage.getItem('user'));
     const {
       name, description, price,
     } = this.state;
-    const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user.id, name, description, price);
+    const { setMyProducts } = this.props;
 
     mallsterApi.addProduct(user, name, description, price)
-      .then(response => {
-        if (response.data.success) {
-          console.log(response.data.success);
+      .then(res => {
+        if (res.data.success) {
+          setMyProducts(res.data.my_products);
         }
-      }).catch(errors => {
-        console.log('errors', errors.response.data.errors);
       });
   }
 
@@ -94,4 +95,14 @@ class ProductForm extends Component {
   }
 }
 
-export default ProductForm;
+const mapDispatchToProps = dispatch => ({
+  setMyProducts: product => {
+    dispatch(setMyProducts(product));
+  },
+});
+
+ProductForm.propTypes = {
+  setMyProducts: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(ProductForm);
