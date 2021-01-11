@@ -11,7 +11,7 @@ class MyProducts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      myProducts: [],
+      myProductsState: [],
       isLoading: true,
     };
   }
@@ -28,17 +28,35 @@ class MyProducts extends Component {
       .then(result => {
         if (mounted) {
           this.setState({
-            myProducts: result.data.my_products,
+            myProductsState: result.data.my_products,
             isLoading: false,
           });
         }
-        setMyProducts(result.data.my_products);
         mounted = false;
+        setMyProducts(result.data.my_products);
       });
   }
 
+  componentDidUpdate() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { myProducts } = this.props;
+    const { myProductsState } = this.state;
+    if (myProducts !== myProductsState) {
+      mallsterApi.getMyProducts(user)
+        .then(result => {
+          if (myProducts !== myProductsState) {
+            this.setState({
+              myProductsState: result.data.my_products,
+              isLoading: false,
+            });
+          }
+          setMyProducts(result.data.my_products);
+        });
+    }
+  }
+
   render() {
-    const { myProducts, isLoading } = this.state;
+    const { myProductsState, isLoading } = this.state;
     return (
       <>
         { !isLoading ? (
@@ -50,7 +68,7 @@ class MyProducts extends Component {
               <ProductForm />
               <div className="row">
                 {
-                  myProducts.map(p => (
+                  myProductsState.map(p => (
                     <Product
                       key={p.id}
                       product={p}
@@ -78,6 +96,7 @@ const mapStateToProps = state => ({
 });
 
 MyProducts.propTypes = {
+  myProducts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   setMyProducts: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
