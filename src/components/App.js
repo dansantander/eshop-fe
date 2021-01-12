@@ -37,7 +37,7 @@ const App = props => {
             <Route exact path="/registration"><Registration /></Route>
             <Route exact path="/products"><ProductList /></Route>
             <Route exact path="/products/:id"><ProductDetails /></Route>
-            <Route exact path="/myproducts"><MyProducts /></Route>
+            <Route exact path="/my_products"><MyProducts /></Route>
             <Route exact path="/favorites"><FavoritesList /></Route>
           </Switch>
         </BrowserRouter>
