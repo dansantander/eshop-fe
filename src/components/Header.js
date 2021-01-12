@@ -30,7 +30,7 @@ const Header = props => {
                 All Products
               </Dropdown.Item>
 
-              <Dropdown.Item as={Link} to="/myproducts" className="pl-2">
+              <Dropdown.Item as={Link} to="/my_products" className="pl-2">
                 My Products
               </Dropdown.Item>
 
