@@ -44,12 +44,10 @@ class MyProducts extends Component {
     if (myProducts !== myProductsState) {
       mallsterApi.getMyProducts(user)
         .then(result => {
-          if (myProducts !== myProductsState) {
-            this.setState({
-              myProductsState: result.data.my_products,
-              isLoading: false,
-            });
-          }
+          this.setState({
+            myProductsState: result.data.my_products,
+            isLoading: false,
+          });
           setMyProducts(result.data.my_products);
         });
     }
