@@ -7,6 +7,7 @@ import { logInUser } from '../../actions/actionsIndex';
 
 import mallsterApi from '../../utils/api';
 /* eslint-disable camelcase */
+/* eslint-disable no-console */
 class Registration extends Component {
   constructor(props) {
     super(props);
@@ -22,8 +23,9 @@ class Registration extends Component {
   }
 
   componentDidUpdate() {
+    const user = JSON.parse(localStorage.getItem('user'));
     const { loggedIn, history } = this.props;
-    if (loggedIn === 'LOGGED_IN') {
+    if (loggedIn === 'LOGGED_IN' && user) {
       history.push('/products');
     }
   }
@@ -46,6 +48,8 @@ class Registration extends Component {
     mallsterApi.signUpUser(username, email, password, password_confirmation)
       .then(response => {
         if (response.data.signed_in) {
+          console.log(response.data.signed_in);
+          console.log(response.data.user);
           logInUser(response.data.user);
           localStorage.setItem('user', JSON.stringify(response.data.user));
           history.push('/products');
