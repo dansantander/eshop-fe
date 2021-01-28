@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+body {
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fafafa;
+  font-size: 0.8rem;
+}
+
+code {
+  font-family:
+    source-code-pro,
+    Menlo,
+    Monaco,
+    Consolas,
+    'Courier New',
+    monospace;
+}
+
+h1 {
+  font-size: 1.5rem !important;
+}
+
+h3 {
+  font-size: 1.2rem !important;
+}
+
+h5 {
+  font-size: 1rem !important;
+}
+
+.logo {
+  font-family: 'Lobster', cursive;
+  font-size: 2rem !important;
+}
+
+.login-container {
+  height: calc(100vh - 62px);
+  background-image: linear-gradient(rgba(255, 194, 115, 0.836), rgba(214, 246, 255, 0.6));
+  background-size: cover;
+}
+
+.login {
+  text-align: center;
+
+  .form-top {
+    p {
+      max-width: 200px;
+    }
+  }
+
+  .form-group {
+    .form-control {
+      border: none;
+      border-radius: 2rem;
+      height: 2.8rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  .btn {
+    background-color: #ff5617;
+    border: none;
+    border-radius: 2rem;
+    min-width: 150px;
+  }
+
+  .submissionErrors {
+    color: red;
+  }
+}
+
+.nav-container {
+  background-color: #ff5617;
+  color: #fff;
+  box-shadow: 1px 4px 5px rgb(182, 182, 182);
+  border-bottom: 0 !important;
+}
+
+.nav-top {
+  border-bottom: 0 !important;
+
+  .dropdown {
+    button {
+      background-color: #ff5617;
+      border: none;
+    }
+  }
+}
+
+.section-title {
+  text-align: center;
+}
+
+.product a {
+  text-decoration: none !important;
+  color: rgb(56, 56, 56);
+}
+
+.card {
+  box-shadow: 2px 5px 8px rgb(230, 230, 230);
+  border-radius: 2rem;
+
+  img {
+    height: 13rem !important;
+  }
+
+  h3 {
+    color: #ff7340 !important;
+  }
+
+  .success {
+    color: green;
+    text-align: center;
+  }
+
+  .error {
+    color: green;
+    text-align: center;
+  }
+}
+
+.fa-heart {
+  color: rgb(67, 184, 106);
+  font-size: 1.3rem;
+  position: absolute;
+  z-index: 1;
+  margin: 8px 8px;
+}
+
+.details {
+  margin: 2rem 1.5rem;
+}
+
+.fa-edit {
+  color: #ff5050;
+  font-size: 1.3rem;
+  position: absolute;
+  z-index: 1;
+  margin: 8px 8px;
+}
+
+.fa-trash-alt {
+  color: rgb(255, 0, 0);
+  font-size: 1.3rem;
+  font-weight: 500;
+  position: absolute;
+  z-index: 1;
+}
